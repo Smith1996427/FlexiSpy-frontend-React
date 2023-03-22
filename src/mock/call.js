@@ -87,3 +87,36 @@ mock.onGet('/api/user/data/voip/list').reply(200, {
 
   ]
 });
+
+
+mock.onGet('/api/user/data/messages').reply(200, {
+  customers: [
+    {
+      id : uuidv4(),
+      fromName: 'Susane',
+      fromEmail : "<susane@de.co.us>",
+      subject : "Science Homework",
+      status: 'received',
+      description: "Check this out JessyQ. The enzyme in the potato is peroxidase. So the quicker the peroxidase is going the more bubbles of oxygen is givenm off.",
+      updatedAt : moment()
+      .subtract(1, 'days')
+      .format("YYYY-MM-DD  hh:mm:ss:A"),
+      attachmentsURL : ["/static/third_party/image/photos_1.png"],
+      attachments:["photo_1.png"]
+    },
+    {
+      id : uuidv4(),
+      fromName: 'Sarah',
+      fromEmail : "<sarah@demo.com>",
+      subject : "Tinny Stuff",
+      status: 'sent',
+      description: "Hi,Find attached",
+      updatedAt : moment()
+      .subtract(1, 'days')
+      .subtract(5, 'hours')
+      .format("YYYY-MM-DD  hh:mm:ss:A"),
+      attachmentsURL : ["/static/third_party/image/photos_2.png"],
+      attachments:["photo_2.png"]
+    }
+  ]
+});

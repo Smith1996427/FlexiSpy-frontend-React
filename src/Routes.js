@@ -95,6 +95,17 @@ const routesConfig = [
         component: lazy(() => import('src/views/data/VoipRecording'))    
       },
 
+      {
+        exact: true,
+        path: '/app/data/messages',
+        component: lazy(() => import('src/views/data/Messages'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/photos',
+        component: lazy(() => import('src/views/data/Photos'))    
+      },
+
 
 
 

@@ -12,3 +12,4 @@ import './socialMock';
 
 import './orderProfile';
 import './call';
+import './files';

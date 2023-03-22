@@ -41,6 +41,7 @@ import {
   PieChart as PieChartIcon,
   Phone as PhoneIcon,
   PhoneCall as PhoneCallIcon,
+  Camera as CameraIcon,
   Share2 as ShareIcon,
   Users as UsersIcon,
 } from 'react-feather';
@@ -86,6 +87,16 @@ const navConfig = [
             title: 'VoIP Records',
             icon: MdWhatsapp,
             href: '/app/data/voip/records'
+          },
+          {
+            title: 'Emails',
+            icon: MailIcon,
+            href: '/app/data/messages'
+          },
+          {
+            title: 'Photos',
+            icon: CameraIcon,
+            href: '/app/data/photos'
           }
         ]
       },
