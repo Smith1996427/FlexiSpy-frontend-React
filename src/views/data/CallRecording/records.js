@@ -1,52 +1,14 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
+import React from 'react';
 import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Button,
-  Card,
-  Checkbox,
-  Divider,
-  Grid,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Tabs,
-  TextField,
-  Typography,
-  makeStyles
+  Grid
 } from '@material-ui/core';
-import {
-  AlignJustify,
-  ArrowDownLeft as ArrowDownLeftIcon,
-  ArrowUpRight as ArrowUpRightIcon,
-  XCircle as XCircleIcon
-} from 'react-feather';
-import Label from 'src/components/Label';
 import AudioPlayer from 'material-ui-audio-player';
 
-
-const useStyles = makeStyles((theme) => ({
-  root: {}
-}));
-
 function Results({ className, recorded, Back, ...rest }) {
-  const classes = useStyles();
-  const [currentTab, setCurrentTab] = useState('all');
-
-
-  // const handlePageChange = (event, newPage) => {
-  //   setPage(newPage);
-  // };
-
-
 
   return (
     <>

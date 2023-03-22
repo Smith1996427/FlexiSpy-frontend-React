@@ -36,6 +36,14 @@ const typeOptions = [
     label: 'Email Messages'
   },
   {
+    value: 'voip',
+    label: 'VoIP Calls'
+  },
+  {
+    value: 'voipRecording',
+    label: 'VoIP Call Recording'
+  },
+  {
     value: 'visited',
     label: 'Websites Visited'
   }
@@ -90,6 +98,25 @@ const directionOptionsEmailMessages = [
   }
 ];
 
+const voipApplication = [
+  {
+    value: 'all',
+    label: 'All'
+  },
+  {
+    value: 'skype',
+    label: 'Skype'
+  },
+  {
+    value: 'telegram',
+    label: 'Telegram'
+  },
+  {
+    value: 'whatsapp',
+    label: 'Whatsapp'
+  }
+];
+
 function BasicForm() {
 
   return (
@@ -97,6 +124,7 @@ function BasicForm() {
       initialValues={{
         type: 'callRecording',
         direction: '',
+        application : '',
         keyword: '',
         end: moment(),
         start: moment()
@@ -184,6 +212,38 @@ function BasicForm() {
                     ))}
                   </TextField>
                   </Grid>
+                {(values.type === "voip" || values.type === "voipRecording" ) &&
+                  <Grid
+                    item
+                    md={10}
+                    xs={12}
+                    mt={2}
+                  >
+                <Box mt={2}>
+                <TextField
+                    fullWidth
+                    label="In this Voip application:"
+                    name="application"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    select
+                    SelectProps={{ native: true }}
+                    value={values.application}
+                    variant="outlined"
+                  >
+                    {voipApplication.map((option) => (
+                      <option
+                        key={option.value}
+                        value={option.value}
+                      >
+                        {option.label}
+                      </option>
+                    ))}
+                </TextField>
+                </Box>
+                </Grid>
+                }
+
                 <Grid
                     item
                     md={10}
@@ -248,6 +308,50 @@ function BasicForm() {
                     variant="outlined"
                   >
                     {directionOptionsEmailMessages.map((option) => (
+                      <option
+                        key={option.value}
+                        value={option.value}
+                      >
+                        {option.label}
+                      </option>
+                    ))}
+                </TextField>
+                }
+                {(values.type === "voip") &&
+                <TextField
+                    fullWidth
+                    label="In this direction"
+                    name="direction"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    select
+                    SelectProps={{ native: true }}
+                    value={values.direction}
+                    variant="outlined"
+                  >
+                    {directionOptionsPhoneCall.map((option) => (
+                      <option
+                        key={option.value}
+                        value={option.value}
+                      >
+                        {option.label}
+                      </option>
+                    ))}
+                </TextField>
+                }
+                {(values.type === "voipRecording") &&
+                <TextField
+                    fullWidth
+                    label="In this direction:"
+                    name="direction"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    select
+                    SelectProps={{ native: true }}
+                    value={values.direction}
+                    variant="outlined"
+                  >
+                    {directionOptionsCallRecord.map((option) => (
                       <option
                         key={option.value}
                         value={option.value}

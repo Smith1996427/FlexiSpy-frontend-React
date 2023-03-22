@@ -86,6 +86,23 @@ const routesConfig = [
       },
       {
         exact: true,
+        path: '/app/data/voip/list',
+        component: lazy(() => import('src/views/data/Voip'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/voip/records',
+        component: lazy(() => import('src/views/data/VoipRecording'))    
+      },
+
+
+
+
+
+
+
+      {
+        exact: true,
         path: '/app/account',
         component: lazy(() => import('src/views/pages/AccountView'))
       },

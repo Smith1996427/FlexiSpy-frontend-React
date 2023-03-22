@@ -42,10 +42,11 @@ import {
   Phone as PhoneIcon,
   PhoneCall as PhoneCallIcon,
   Share2 as ShareIcon,
-  Users as UsersIcon
+  Users as UsersIcon,
 } from 'react-feather';
 import Logo from 'src/components/Logo';
 import NavItem from './NavItem';
+import {MdAddCall, MdWhatsapp} from 'react-icons/md';
 
 const navConfig = [
   {
@@ -77,9 +78,14 @@ const navConfig = [
             href: '/app/data/call/recordings'
           },
           {
-            title: 'Edit Customer',
-            icon: UsersIcon,
-            href: '/app/management/customers/1/edit'
+            title: 'VoIP',
+            icon: MdAddCall,
+            href: '/app/data/voip/list'
+          },
+          {
+            title: 'VoIP Records',
+            icon: MdWhatsapp,
+            href: '/app/data/voip/records'
           }
         ]
       },

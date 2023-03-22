@@ -1,4 +1,4 @@
-import React,{state} from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -36,8 +36,6 @@ function Header({ className, ...rest }) {
   const classes = useStyles();
 
   const [recordAllow, setRecordAllow] = useState(false);
-  console.log(recordAllow)
-
   return (
     <Grid
       className={clsx(classes.root, className)}

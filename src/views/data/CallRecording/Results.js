@@ -24,7 +24,7 @@ import {
 import {
   ArrowDownLeft as ArrowDownLeftIcon,
   ArrowUpRight as ArrowUpRightIcon,
-  XCircle as XCircleIcon
+  PhoneMissed as PhoneMissedIcon
 } from 'react-feather';
 import Label from 'src/components/Label';
  import Records from './records';
@@ -347,7 +347,7 @@ function Results({ className, customers, ...rest }) {
                       }
                        {(customer.status === "missed") &&
                          <Label color="primary">
-                            <XCircleIcon />
+                            <PhoneMissedIcon />
                         </Label>
                       }
                     </TableCell>
