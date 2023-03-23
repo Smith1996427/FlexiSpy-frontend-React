@@ -13,7 +13,6 @@ import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Header from './Header';
 import Results from './Results';
-import Details  from './Details';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,14 +26,15 @@ const useStyles = makeStyles((theme) => ({
 function CustomerListView() {
   const classes = useStyles();
   const isMountedRef = useIsMountedRef();
-  const [logs, setLogs] = useState(null);
+  const [number, setNumber] = useState("");
 
   const getLogs = useCallback(() => {
     axios
-      .get('/api/user/data/location')
+      .get('/api/user/monitor/get')
       .then((response) => {
         if (isMountedRef.current) {
-          setLogs(response.data.customers);
+          if(response.data.result)
+          setNumber(response.data.monitor);
         }
       });
   }, [isMountedRef]);
@@ -43,27 +43,16 @@ function CustomerListView() {
     getLogs();
   }, [getLogs]);
 
-  if (!logs) {
-    return null;
-  }
-
   return (
     <Page
       className={classes.root}
-      title="Location"
+      title="Device Number"
     >
       <Container maxWidth={false}>
         <Header />
-        {logs && (
-          <>
           <Box mt={3}>
-            <Results customers={logs} />
+            <Results number={number} />
           </Box>
-          <Box mt={2}>
-          <Details customers={logs} />
-         </Box>
-        </>
-        )}
       </Container>
     </Page>
   );

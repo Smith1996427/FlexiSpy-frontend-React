@@ -36,7 +36,7 @@ function Results({ className, customers, ...rest }) {
           <Grid container>
           {customers.map((customer) => {
             return(
-              <Grid item md={2} xs = {6}>
+              <Grid item key={customer.id} md={2} xs = {6}>
               <VideoCard className={classes.card} key={customer.id} video = {customer} />
               </Grid>
               )

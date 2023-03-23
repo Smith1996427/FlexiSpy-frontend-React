@@ -1,80 +1,84 @@
 /* eslint-disable max-len */
 import React from 'react';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
-  Button,
   Card,
+  Divider,
+  IconButton,
+  SvgIcon,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  makeStyles
+  makeStyles,
+  CardContent,
+  CardHeader
 } from '@material-ui/core';
-import PropTypes from 'prop-types';
+import {Delete as DeleteIcon} from 'react-feather';
 
 const useStyles = makeStyles((theme) => ({
-  root: {}
+  root: {},
+  contend : {
+    padding : "20px"
+  }
 }));
 
 function Results({ className, customers, ...rest }) {
   const classes = useStyles();
-
-  if(customers.length ===0)
-    return null;
 
   return (
     <Card
       className={clsx(classes.root, className)}
       {...rest}
     > 
+      <CardHeader title="Applications Used"  />
+      <Divider />
+      <CardContent className={classes.content}>
       <PerfectScrollbar>
-        <Box minWidth={700}>
+        <Box>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>
-                  Latitude
+                  App Name
                 </TableCell>
                 <TableCell>
-                  Longitude
+                   State
                 </TableCell>
                 <TableCell>
-                  Accuracy(m)
+                   Date and Time
                 </TableCell>
-                <TableCell>
-                  Date & Time
-                </TableCell>
-                <TableCell  align="right">
-                  Map view
+                <TableCell align='right'>
+                  Delete
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-            {customers.map((customer) => {
+              {customers.map((customer) => {
+
                 return (
                   <TableRow
-                    hover
                     key={customer.id}
                   >
                     <TableCell>
-                      {customer.latitude}
+                      {customer.name}
                     </TableCell>
                     <TableCell>
-                      {customer.longitude}
-                    </TableCell>
-                    <TableCell>
-                      {customer.accuracy}
+                      {customer.state}
                     </TableCell>
                     <TableCell>
                       {customer.updatedAt}
                     </TableCell>
-                    <TableCell align="right">
-                      <Button>
-                      <img width="40px" height="40px" src='/static/third_party/image/LocationMap.png' alt='map'/>
-                      </Button>
+                    <TableCell align='right'>
+                    <IconButton>
+                        <SvgIcon fontSize="small">
+                          <DeleteIcon />
+                        </SvgIcon>
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 );
@@ -83,6 +87,7 @@ function Results({ className, customers, ...rest }) {
           </Table>
         </Box>
       </PerfectScrollbar>
+      </CardContent>
     </Card>
   );
 }
@@ -91,5 +96,4 @@ Results.propTypes = {
   className: PropTypes.string,
   customers: PropTypes.array
 };
-
 export default Results;

@@ -45,7 +45,7 @@ function CustomerListView() {
   if (!logs) {
     return null;
   }
-console.log(logs)
+  
   return (
     <Page
       className={classes.root}

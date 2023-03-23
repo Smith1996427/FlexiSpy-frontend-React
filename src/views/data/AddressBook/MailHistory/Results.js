@@ -114,9 +114,6 @@ function applySort(customers, sort) {
 
 const useStyles = makeStyles((theme) => ({
   root: {},
-  queryField: {
-    width: 500
-  },
   bulkOperations: {
     position: 'relative'
   },
@@ -297,7 +294,7 @@ function Results({ className, customers, ...rest }) {
                   Status
                 </TableCell>
                 <TableCell>
-                  Mail
+                  Subject
                 </TableCell>
                 <TableCell>
                   Content
@@ -312,6 +309,7 @@ function Results({ className, customers, ...rest }) {
                 const isCustomerSelected = selectedCustomers.includes(customer.id);
 
                 return (
+                  <>
                   <TableRow
                     hover
                     key={customer.id}
@@ -338,18 +336,7 @@ function Results({ className, customers, ...rest }) {
                       }
                     </TableCell>
                     <TableCell>
-                      <Typography
-                        variant="body2"
-                        color="textPrimary"
-                      >
-                        {customer.fromName}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                      >
-                        {customer.subject}
-                      </Typography>
+                      {customer.subject}
                     </TableCell>
                     <TableCell>
                       {customer.description}
@@ -358,6 +345,7 @@ function Results({ className, customers, ...rest }) {
                       {customer.updatedAt}
                     </TableCell>
                   </TableRow>
+                 </>
                 );
               })}
             </TableBody>
@@ -383,13 +371,6 @@ function Results({ className, customers, ...rest }) {
         ><Fade in={open}>
               <Card className={classes.modal}>
               <CardContent>  
-
-                <Typography color='textPrimary' variant="h5">
-                  From : {message.fromName}
-                </Typography>
-                <Typography color='textPrimary' variant="h5">
-                  Email : {message.fromEmail}
-                </Typography>
                 <Typography color='textPrimary' variant="h5">
                   Subject : {message.subject}
                 </Typography>

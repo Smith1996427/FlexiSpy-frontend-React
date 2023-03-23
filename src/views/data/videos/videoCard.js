@@ -64,8 +64,7 @@ function ProjectCard({ video, className, ...rest }) {
 }
 
 ProjectCard.propTypes = {
-  className: PropTypes.string,
-  project: PropTypes.object.isRequired
+  className: PropTypes.string
 };
 
 export default ProjectCard;

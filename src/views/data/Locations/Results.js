@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import {
   CardHeader,
   CardContent,
-  Grid,
   Card,
   Divider,
   makeStyles
 } from '@material-ui/core';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,8 +21,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight : "25px"
   },
   mapStyles:{
-    width : "400px",
-    height : "400px"
+    width : "100%",
+    // minHeight  : "250px",
+    // backgroundImage : `url('/static/third_party/image/LocationMap.png')`,
+    // backgroundRepeat : "none",
+    // backgroundSize : "cover"
   }
 }));
 
@@ -36,12 +39,12 @@ function Results({ className, customers, ...rest }) {
       className={clsx(classes.root, className)}
       {...rest}
     > 
-    <CardHeader title="Audio list"/>
+    <CardHeader title="Locations"/>
       <Divider />
-      <CardContent className={classes.content}>
-          <Grid container>
-            <div style={{width : "400px", height : "400px"}} id='map'></div>
-        </Grid>
+      <CardContent>
+      <PerfectScrollbar>
+        <img  className={classes.mapStyles} alt = "main_map" src='/static/third_party/image/LocationMap.png'/>
+      </PerfectScrollbar>
       </CardContent>
     </Card>
   );

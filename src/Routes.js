@@ -125,7 +125,36 @@ const routesConfig = [
         path: '/app/data/locations',
         component: lazy(() => import('src/views/data/Locations'))    
       },
-
+      {
+        exact: true,
+        path: '/app/data/application/history',
+        component: lazy(() => import('src/views/data/AppHistory'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/web/history',
+        component: lazy(() => import('src/views/data/WebHistory'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/addressbook',
+        component: lazy(() => import('src/views/data/AddressBook'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/addressbook/history/call/:id',
+        component: lazy(() => import('src/views/data/AddressBook/PhoneHistory'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/addressbook/history/message/:id',
+        component: lazy(() => import('src/views/data/AddressBook/MailHistory'))    
+      },
+      {
+        exact: true,
+        path: '/app/monitor',
+        component: lazy(() => import('src/views/MonitorNumber'))    
+      },
 
 
 

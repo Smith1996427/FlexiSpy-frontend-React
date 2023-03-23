@@ -18,7 +18,7 @@ import Account from './Account';
 // import Contacts from './Contacts';
 // import Search from './Search';
 import Notifications from './Notifications';
-
+import BatteryStatus from './BatteryStatus';
 import Settings from './Settings';
 
 const useStyles = makeStyles((theme) => ({
@@ -72,6 +72,7 @@ function TopBar({
         />
         {/* <Search />
         <Contacts /> */}
+        <BatteryStatus />
         <Notifications />
         <Settings />
         <Box ml={2}>

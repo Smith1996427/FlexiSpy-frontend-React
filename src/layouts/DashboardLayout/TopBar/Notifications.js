@@ -97,7 +97,8 @@ function Notifications() {
             Notifications
           </Typography>
         </Box>
-        {notifications.length === 0 ? (
+        {/* {notifications.length === 0 ? (
+           */}
           <Box p={2}>
             <Typography
               variant="h6"
@@ -106,8 +107,8 @@ function Notifications() {
               There are no notifications
             </Typography>
           </Box>
-        ) : (
-          <>
+        {/* ): ( */}
+          {/* <>
             <List
               className={classes.list}
               disablePadding
@@ -155,7 +156,7 @@ function Notifications() {
               </Button>
             </Box>
           </>
-        )}
+        )} */}
       </Popover>
     </>
   );

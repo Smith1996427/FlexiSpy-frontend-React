@@ -6,13 +6,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Button,
-  Backdrop,
   Card,
-  CardContent,
   Checkbox,
-  Divider,
-  Fade,
-  Modal,
   Tab,
   Table,
   TableBody,
@@ -22,12 +17,12 @@ import {
   TableRow,
   Tabs,
   TextField,
-  Typography,
   makeStyles
 } from '@material-ui/core';
 import {
   ArrowDownLeft as ArrowDownLeftIcon,
-  ArrowUpRight as ArrowUpRightIcon
+  ArrowUpRight as ArrowUpRightIcon,
+  PhoneMissed as PhoneMissedIcon
 } from 'react-feather';
 import Label from 'src/components/Label';
 
@@ -37,12 +32,16 @@ const tabs = [
     label: 'All'
   },
   {
-    value: 'received',
-    label: 'received'
+    value: 'incoming',
+    label: 'Incoming'
   },
   {
-    value: 'sent',
-    label: 'sent'
+    value: 'outcoming',
+    label: 'Outcoming'
+  },
+  {
+    value: 'missed',
+    label: 'Missed'
   }
 ];
 
@@ -136,20 +135,7 @@ const useStyles = makeStyles((theme) => ({
     height: 42,
     width: 42,
     marginRight: theme.spacing(1)
-  },
-  modal:{
-    position: 'absolute',
-    maxWidth: 1200,
-    top : 50,
-    width : "50%",
-    padding: theme.spacing(2, 4, 3),
-    
-  },
-  paper:{
-    display: 'flex',
-    justifyContent: 'center',
-    overflow: "scroll"
-  },
+  }
 }));
 
 function Results({ className, customers, ...rest }) {
@@ -159,18 +145,18 @@ function Results({ className, customers, ...rest }) {
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
   const [sort, setSort] = useState(sortOptions[0].value);
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState(customers[0]);
   const [filters, setFilters] = useState({
-    received: null,
-    sent: null
+    incoming: null,
+    outcoming: null,
+    missed: null
   });
 
   const handleTabsChange = (event, value) => {
     const updatedFilters = {
       ...filters,
-      received: null,
-      sent: null
+      incoming: null,
+      outcoming: null,
+      missed: null
     };
 
     if (value !== 'all') {
@@ -209,12 +195,6 @@ function Results({ className, customers, ...rest }) {
     setLimit(event.target.value);
   };
 
-
-  
-  const openModal = (messageContent) => {
-    setMessage(messageContent);
-    setOpen(true);
-  };
   // Usually query is done on backend with indexing solutions
   const filteredCustomers = applyFilters(customers, filters);
   const sortedCustomers = applySort(filteredCustomers, sort);
@@ -263,7 +243,7 @@ function Results({ className, customers, ...rest }) {
           ))}
         </TextField>
         </Box>
-      <Divider />
+      {/* <Divider /> */}
       {enableBulkOperations && (
         <div className={classes.bulkOperations}>
           <div className={classes.bulkActions}>
@@ -297,13 +277,10 @@ function Results({ className, customers, ...rest }) {
                   Status
                 </TableCell>
                 <TableCell>
-                  Mail
-                </TableCell>
-                <TableCell>
-                  Content
+                  duration
                 </TableCell>
                 <TableCell  align="right">
-                  Date
+                  Date & Time
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -316,7 +293,6 @@ function Results({ className, customers, ...rest }) {
                     hover
                     key={customer.id}
                     selected={isCustomerSelected}
-                    onClick = {() => openModal(customer)}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
@@ -326,33 +302,24 @@ function Results({ className, customers, ...rest }) {
                       />
                     </TableCell>
                     <TableCell>
-                      {(customer.status === "received") &&
+                      {(customer.status === "incoming") &&
                          <Label color="success">
                               <ArrowDownLeftIcon />
                         </Label>
                       }
-                      {(customer.status === "sent") &&
+                      {(customer.status === "outcoming") &&
                          <Label color="error">
                             <ArrowUpRightIcon />
                         </Label>
                       }
+                       {(customer.status === "missed") &&
+                         <Label color="primary">
+                            <PhoneMissedIcon />
+                        </Label>
+                      }
                     </TableCell>
                     <TableCell>
-                      <Typography
-                        variant="body2"
-                        color="textPrimary"
-                      >
-                        {customer.fromName}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                      >
-                        {customer.subject}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      {customer.description}
+                      {customer.duration}
                     </TableCell>
                     <TableCell align="right">
                       {customer.updatedAt}
@@ -373,59 +340,6 @@ function Results({ className, customers, ...rest }) {
         rowsPerPage={limit}
         rowsPerPageOptions={[5, 10, 25]}
       />
-      
-      <Modal open={open}  className={classes.paper}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-            timeout: 500,
-        }}
-        ><Fade in={open}>
-              <Card className={classes.modal}>
-              <CardContent>  
-
-                <Typography color='textPrimary' variant="h5">
-                  From : {message.fromName}
-                </Typography>
-                <Typography color='textPrimary' variant="h5">
-                  Email : {message.fromEmail}
-                </Typography>
-                <Typography color='textPrimary' variant="h5">
-                  Subject : {message.subject}
-                </Typography>
-                <Typography color='textPrimary' variant="h5">
-                  Date : {message.updatedAt}
-                </Typography>
-                <Box mt={2} mb={2}>
-                  <Divider />
-                </Box>        
-                <Box display="flex">               
-                  <Typography variant="h5">
-                    Attachments : &nbsp;&nbsp;&nbsp;
-                  </Typography>
-                  <Typography color='textSecondary' variant="h5">
-                    <a style={{color:"white"}} href={message.attachmentsURL[0]}>{message.attachments[0]}</a>
-                  </Typography>
-                </Box>  
-                <Box mt={2} mb={2}>
-                <Divider />
-                </Box>
-                <Typography color='textPrimary' variant="h5">
-                    Content : 
-                  </Typography>
-                  <Typography color='textSecondary' variant="h6">
-                    {message.description}
-                  </Typography>
-                <Box mt={2} mb={2}>
-                <Divider />
-                </Box>     
-                <Box style={{textAlign : "right"}}>               
-                <Button onClick={() => setOpen(false)}>Close</Button>
-                </Box> 
-              </CardContent>
-          </Card>
-        </Fade>
-        </Modal>
     </Card>
   );
 }

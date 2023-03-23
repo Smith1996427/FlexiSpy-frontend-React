@@ -22,10 +22,12 @@ import {
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import {
   Briefcase as BriefcaseIcon,
+  Book as BookIcon,
   Calendar as CalendarIcon,
   ShoppingCart as ShoppingCartIcon,
   Folder as FolderIcon,
   BarChart as BarChartIcon,
+  Globe as GlobeIcon,
   Lock as LockIcon,
   UserPlus as UserPlusIcon,
   Shield as ShieldIcon,
@@ -49,7 +51,7 @@ import {
 } from 'react-feather';
 import Logo from 'src/components/Logo';
 import NavItem from './NavItem';
-import {MdAddCall, MdWhatsapp} from 'react-icons/md';
+import {MdAddCall, MdWhatsapp, MdPhoneAndroid} from 'react-icons/md';
 import {BsCameraVideo} from 'react-icons/bs';
 
 const navConfig = [
@@ -121,9 +123,29 @@ const navConfig = [
             title: 'Locations',
             icon: MapPinIcon,
             href: '/app/data/locations'
+          },
+          {
+            title: 'App Activity',
+            icon: MdPhoneAndroid,
+            href: '/app/data/application/history'
+          },
+          {
+            title: 'Web Activity',
+            icon: GlobeIcon,
+            href: '/app/data/web/history'
+          },
+          {
+            title: 'Address Book',
+            icon: BookIcon,
+            href: '/app/data/addressbook'
           }
         ]
       },
+      {
+        title: 'Device Number',
+        icon: UserIcon,
+        href: '/app/monitor'
+      }
     ]
   },
   {

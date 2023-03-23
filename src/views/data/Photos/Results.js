@@ -60,7 +60,7 @@ function Results({ className, customers, ...rest }) {
     setPhoto(messageContent);
     setOpen(true);
   };
-  console.log(photo)
+
 
   return (
     <Card

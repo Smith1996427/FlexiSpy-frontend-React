@@ -13,7 +13,8 @@ import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Header from './Header';
 import Results from './Results';
-import Details  from './Details';
+import { useParams } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,9 +30,12 @@ function CustomerListView() {
   const isMountedRef = useIsMountedRef();
   const [logs, setLogs] = useState(null);
 
+  const params = useParams();
+  var Id = params.id;
+
   const getLogs = useCallback(() => {
     axios
-      .get('/api/user/data/location')
+      .get('/api/user/data/messages/list/5e887a62195cc5aef7e8ca5d')
       .then((response) => {
         if (isMountedRef.current) {
           setLogs(response.data.customers);
@@ -47,22 +51,22 @@ function CustomerListView() {
     return null;
   }
 
+  const info = {
+    name : logs.name,
+    avatar : logs.avatar,
+    phone : logs.phoneNumber
+  }
   return (
     <Page
       className={classes.root}
-      title="Location"
+      title="Email Messages"
     >
       <Container maxWidth={false}>
-        <Header />
+        <Header contacter = {info}/>
         {logs && (
-          <>
           <Box mt={3}>
-            <Results customers={logs} />
+            <Results customers={logs.history} />
           </Box>
-          <Box mt={2}>
-          <Details customers={logs} />
-         </Box>
-        </>
         )}
       </Container>
     </Page>
