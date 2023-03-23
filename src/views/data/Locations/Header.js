@@ -4,17 +4,12 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
   Breadcrumbs,
-  Button,
   Grid,
   Link,
-  SvgIcon,
   Typography,
   makeStyles
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import {
-  Search as SearchIcon
-} from 'react-feather';
 
 const useStyles = makeStyles((theme) => ({
   root: {},

@@ -12,8 +12,6 @@ import {
 
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 
-import {BsVolumeUp} from 'react-icons/bs'
-
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop : 30

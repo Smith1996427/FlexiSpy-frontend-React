@@ -12,8 +12,6 @@ import {
 } from '@material-ui/core';
 
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {},
   content : {
@@ -21,8 +19,14 @@ const useStyles = makeStyles((theme) => ({
   },
   card : {
     marginRight : "25px"
+  },
+  mapStyles:{
+    width : "400px",
+    height : "400px"
   }
 }));
+
+
 
 function Results({ className, customers, ...rest }) {
   const classes = useStyles();
@@ -31,11 +35,12 @@ function Results({ className, customers, ...rest }) {
     <Card
       className={clsx(classes.root, className)}
       {...rest}
-    > <CardHeader title="Audio list"/>
+    > 
+    <CardHeader title="Audio list"/>
       <Divider />
       <CardContent className={classes.content}>
           <Grid container>
-            dfdfdf
+            <div style={{width : "400px", height : "400px"}} id='map'></div>
         </Grid>
       </CardContent>
     </Card>

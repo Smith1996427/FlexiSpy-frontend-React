@@ -13,6 +13,7 @@ import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Header from './Header';
 import Results from './Results';
+import Details  from './Details';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,9 +55,14 @@ function CustomerListView() {
       <Container maxWidth={false}>
         <Header />
         {logs && (
+          <>
           <Box mt={3}>
             <Results customers={logs} />
           </Box>
+          <Box mt={2}>
+          <Details customers={logs} />
+         </Box>
+        </>
         )}
       </Container>
     </Page>
