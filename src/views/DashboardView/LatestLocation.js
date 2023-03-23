@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import {
   ArrowRight as ArrowRightIcon,
-  Compass as CompassIcon
+  MapPin as MapPinIcon
 } from 'react-feather';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +65,7 @@ function TodaysMoney({ className, ...rest }) {
       <Box display="flex"  style={{backgroundColor : "rgb(46 78 75)"}}>
         <Box display="flex">
           <Avatar className={classes.avatar}>
-            <CompassIcon />
+            <MapPinIcon />
           </Avatar>
           <Typography style={{marginTop : "15px"}}>
             Latest Location

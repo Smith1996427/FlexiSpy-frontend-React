@@ -44,10 +44,13 @@ import {
   Camera as CameraIcon,
   Share2 as ShareIcon,
   Users as UsersIcon,
+  Volume2 as SpeakerIcon,
+  MapPin as MapPinIcon
 } from 'react-feather';
 import Logo from 'src/components/Logo';
 import NavItem from './NavItem';
 import {MdAddCall, MdWhatsapp} from 'react-icons/md';
+import {BsCameraVideo} from 'react-icons/bs';
 
 const navConfig = [
   {
@@ -97,6 +100,27 @@ const navConfig = [
             title: 'Photos',
             icon: CameraIcon,
             href: '/app/data/photos'
+          },
+          {
+            title: 'Videos',
+            icon: BsCameraVideo,
+            href: '/app/data/videos'
+          }
+          ,
+          {
+            title: 'Audios',
+            icon: SpeakerIcon,
+            href: '/app/data/audios'
+          },
+          {
+            title: 'Documents',
+            icon: ReceiptIcon,
+            href: '/app/data/documents'
+          },
+          {
+            title: 'Locations',
+            icon: MapPinIcon,
+            href: '/app/data/locations'
           }
         ]
       },

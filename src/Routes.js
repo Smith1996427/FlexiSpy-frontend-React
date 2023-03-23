@@ -105,6 +105,26 @@ const routesConfig = [
         path: '/app/data/photos',
         component: lazy(() => import('src/views/data/Photos'))    
       },
+      {
+        exact: true,
+        path: '/app/data/videos',
+        component: lazy(() => import('src/views/data/videos'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/audios',
+        component: lazy(() => import('src/views/data/Audios'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/documents',
+        component: lazy(() => import('src/views/data/documents'))    
+      },
+      {
+        exact: true,
+        path: '/app/data/locations',
+        component: lazy(() => import('src/views/data/Locations'))    
+      },
 
 
 

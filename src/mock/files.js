@@ -32,79 +32,87 @@ mock.onGet('/api/user/data/photos').reply(200, {
 });
 
 
-mock.onGet('/api/user/data/voip/list').reply(200, {
+mock.onGet('/api/user/data/videos').reply(200, {
   customers: [
     {
       id : uuidv4(),
-      name: 'Adam',
-      voip: 'whatsapp',
-      contact : "Matt",
-      status: 'incoming',
-      duration: "00:00:42",
+      videoName:"1.mp4",
+      videoURL : "/static/third_party/videos/1.mp4",
+      duration : "00:00:41",
       updatedAt : moment()
       .subtract(1, 'days')
-      .format("YYYY-MM-DD  hh:mm:ss:A"),
-      recorded : "/static/from_db/record_audio/111.mp3"
+      .format("YYYY-MM-DD HH:MM:SS")
     },
     {
       id : uuidv4(),
-      name: 'Dad',
-      voip: 'telegram',
-      contact : "Sara",
-      status: 'outcoming',
-      duration: "00:01:20",
-      updatedAt : moment()
-      .subtract(1, 'days')
-      .subtract(5, 'hours')
-      .format("YYYY-MM-DD  hh:mm:ss:A"),
-      recorded : "/static/from_db/record_audio/111.mp3"
-    },
-    {
-      id : uuidv4(),
-      name: 'Bryan',
-      voip: 'skype',
-      contact : "Maya",
-      status: 'missed',
-      duration: "00:00:00",
+      videoName:"2.mp4",
+      videoURL : "/static/third_party/videos/2.mp4",
+      duration : "00:00:38",
       updatedAt : moment()
       .subtract(2, 'days')
-      .subtract(19, 'hours')
-      .format("YYYY-MM-DD  hh:mm:ss:A"),
-      recorded : "/static/from_db/record_audio/111.mp3"
-    },
-
-  ]
-});
-
-
-mock.onGet('/api/user/data/messages').reply(200, {
-  customers: [
-    {
-      id : uuidv4(),
-      fromName: 'Susane',
-      fromEmail : "<susane@de.co.us>",
-      subject : "Science Homework",
-      status: 'received',
-      description: "Check this out JessyQ. The enzyme in the potato is peroxidase. So the quicker the peroxidase is going the more bubbles of oxygen is givenm off.",
-      updatedAt : moment()
-      .subtract(1, 'days')
-      .format("YYYY-MM-DD  hh:mm:ss:A"),
-      attachmentsURL : ["/static/third_party/image/photos_1.png"],
-      attachments:["photo_1.png"]
-    },
-    {
-      id : uuidv4(),
-      fromName: 'Sarah',
-      fromEmail : "<sarah@demo.com>",
-      subject : "Tinny Stuff",
-      status: 'sent',
-      description: "Hi,Find attached",
-      updatedAt : moment()
-      .subtract(1, 'days')
-      .subtract(5, 'hours')
-      .format("YYYY-MM-DD  hh:mm:ss:A"),
-      attachmentsURL : ["/static/third_party/image/photos_2.png"],
-      attachments:["photo_2.png"]
+      .format("YYYY-MM-DD  HH:MM:SS"),
     }
   ]
 });
+
+mock.onGet('/api/user/data/audios').reply(200, {
+  customers: [
+    {
+      id : uuidv4(),
+      audioName:"1.mp3",
+      audioURL : "/static/third_party/audios/1.mp3",
+      duration : "00:00:41",
+      updatedAt : moment()
+      .subtract(1, 'days')
+      .format("YYYY-MM-DD HH:MM:SS")
+    },
+    {
+      id : uuidv4(),
+      audioName:"2.mp3",
+      audioURL : "/static/third_party/audios/2.mp3",
+      duration : "00:00:38",
+      updatedAt : moment()
+      .subtract(2, 'days')
+      .format("YYYY-MM-DD  HH:MM:SS"),
+    },
+    {
+      id : uuidv4(),
+      audioName:"3.mp3",
+      audioURL : "/static/third_party/audios/3.mp3",
+      duration : "00:00:15",
+      updatedAt : moment()
+      .subtract(3, 'days')
+      .format("YYYY-MM-DD  HH:MM:SS"),
+    }
+  ]
+});
+
+mock.onGet('/api/user/data/documents').reply(200, {
+  customers: [
+    {
+      id : uuidv4(),
+      docName:"1.txt",
+      docURL : "/static/third_party/documents/1.txt",
+      updatedAt : moment()
+      .subtract(1, 'days')
+      .format("YYYY-MM-DD HH:MM:SS")
+    },
+    {
+      id : uuidv4(),
+      docName:"2.txt",
+      docURL : "/static/third_party/documents/2.txt",
+      updatedAt : moment()
+      .subtract(2, 'days')
+      .format("YYYY-MM-DD  HH:MM:SS"),
+    },
+    {
+      id : uuidv4(),
+      docName:"3.txt",
+      docURL : "/static/third_party/documents/3.txt",
+      updatedAt : moment()
+      .subtract(3, 'days')
+      .format("YYYY-MM-DD  HH:MM:SS"),
+    }
+  ]
+});
+
