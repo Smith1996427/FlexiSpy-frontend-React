@@ -14,8 +14,8 @@ import { Link as RouterLink } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
-    paddingTop: 300,
-    paddingBottom: 500,
+    paddingTop: 200,
+    paddingBottom: 400,
     [theme.breakpoints.down('md')]: {
       paddingTop: 60,
       paddingBottom: 60
@@ -76,7 +76,7 @@ function Hero({ className, ...rest }) {
                   underline="none"
                   variant="h1"
                 >
-                  start
+                  START
                 </Link>
               </Typography>
             </Box>

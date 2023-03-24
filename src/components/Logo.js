@@ -5,7 +5,7 @@ function Logo(props) {
     <img
       alt="Logo"
       src="/static/home/logo.png"
-      style={{opacity : 0.4}}
+      style={{opacity : 1}}
       {...props}
     />
   );
