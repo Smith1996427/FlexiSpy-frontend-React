@@ -17,7 +17,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    minHeight : "320px"
+    minHeight : "250px",
+    marginLeft : "10%",
+    marginRight : "10%"
   },
   label: {
     marginLeft: theme.spacing(1)
@@ -73,17 +75,17 @@ function TodaysMoney({ className, ...rest }) {
           >
             EMEI  &nbsp;&nbsp;&nbsp;  :  &nbsp;&nbsp;&nbsp;  demo
           </Typography>
-          <Typography
+          {/* <Typography
             variant="h5"
             color="textSecondary"
           >
             Network  &nbsp;&nbsp;&nbsp;  :  &nbsp;&nbsp;&nbsp;  -
-          </Typography>
+          </Typography> */}
           <Typography
             variant="h5"
             color="textSecondary"
           >
-            Battery  &nbsp;&nbsp;&nbsp;  :  &nbsp;&nbsp;&nbsp;  %
+            Battery  &nbsp;&nbsp;&nbsp;  :  &nbsp;&nbsp;&nbsp;  75%
           </Typography>
           <Typography
             variant="h5"

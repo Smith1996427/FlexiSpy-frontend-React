@@ -6,14 +6,16 @@ import {
   Container,
   Grid,
   Typography,
+  Link,
   makeStyles
 } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
-    paddingTop: 200,
-    paddingBottom: 200,
+    paddingTop: 300,
+    paddingBottom: 500,
     [theme.breakpoints.down('md')]: {
       paddingTop: 60,
       paddingBottom: 60
@@ -29,15 +31,6 @@ const useStyles = makeStyles((theme) => ({
       transform: 'rotateY(-35deg) rotateX(15deg)',
       backfaceVisibility: 'hidden',
       boxShadow: theme.shadows[16]
-    }
-  },
-  shape: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    '& > img': {
-      maxWidth: '90%',
-      height: 'auto'
     }
   }
 }));
@@ -67,77 +60,25 @@ function Hero({ className, ...rest }) {
               height="100%"
             >
               <Typography
-                variant="overline"
-                color="secondary"
-              >
-                Introducing
-              </Typography>
-              <Typography
                 variant="h1"
                 color="textPrimary"
+                align='center'
               >
-                Devias React Material Kit - PRO
+                Welcom to visit <br /> fiexiSPY!
               </Typography>
-              <Box mt={3}>
-                <Typography
-                  variant="body1"
-                  color="textSecondary"
+              <Typography
+                align='center'
+              >
+                <Link
+                  color="secondary"
+                  component={RouterLink}
+                  to="/app"
+                  underline="none"
+                  variant="h1"
                 >
-                  A professional kit that comes with ready-to-use Material-UI© components
-                  developed with one common goal in mind, help you build faster &amp; beautiful
-                  applications. Each component is fully customizable,
-                  responsive and easy to integrate.
-                </Typography>
-              </Box>
-              <Box mt={3}>
-                <Grid
-                  container
-                  spacing={3}
-                >
-                  <Grid item>
-                    <Typography
-                      variant="h1"
-                      color="secondary"
-                    >
-                      30+
-                    </Typography>
-                    <Typography
-                      variant="overline"
-                      color="textSecondary"
-                    >
-                      Demo Pages
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography
-                      variant="h1"
-                      color="secondary"
-                    >
-                      UX
-                    </Typography>
-                    <Typography
-                      variant="overline"
-                      color="textSecondary"
-                    >
-                      Complete Flows
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography
-                      variant="h1"
-                      color="secondary"
-                    >
-                      300+
-                    </Typography>
-                    <Typography
-                      variant="overline"
-                      color="textSecondary"
-                    >
-                      Components
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
+                  start
+                </Link>
+              </Typography>
             </Box>
           </Grid>
           <Grid
@@ -146,12 +87,6 @@ function Hero({ className, ...rest }) {
             md={7}
           >
             <Box position="relative">
-              <div className={classes.shape}>
-                <img
-                  alt="Shapes"
-                  src="/static/home/shapes.svg"
-                />
-              </div>
               <div className={classes.image}>
                 <img
                   alt="Presentation"

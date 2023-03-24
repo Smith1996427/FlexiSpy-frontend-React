@@ -13,7 +13,6 @@ import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Header from './Header';
 import Results from './Results';
-// import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,17 +26,15 @@ const useStyles = makeStyles((theme) => ({
 function CustomerListView() {
   const classes = useStyles();
   const isMountedRef = useIsMountedRef();
-  const [logs, setLogs] = useState(null);
-
-  // const params = useParams();
-  // var Id = params.id;
+  const [number, setNumber] = useState("");
 
   const getLogs = useCallback(() => {
     axios
-      .get('/api/user/data/call/list/5e887a62195cc5aef7e8ca5d')
+      .get('/api/user/monitor/get')
       .then((response) => {
         if (isMountedRef.current) {
-          setLogs(response.data.customers);
+          if(response.data.result)
+          setNumber(response.data.monitor);
         }
       });
   }, [isMountedRef]);
@@ -46,28 +43,16 @@ function CustomerListView() {
     getLogs();
   }, [getLogs]);
 
-  if (!logs) {
-    return null;
-  }
-
-  const info = {
-    name : logs.name,
-    avatar : logs.avatar,
-    phone : logs.phoneNumber
-  }
-
   return (
     <Page
       className={classes.root}
-      title="Call Logs"
+      title="Signal Company"
     >
       <Container maxWidth={false}>
-        <Header contacter = {info}/>
-        {logs && (
+        <Header />
           <Box mt={3}>
-            <Results customers={logs.history} />
+            <Results number={number} />
           </Box>
-        )}
       </Container>
     </Page>
   );

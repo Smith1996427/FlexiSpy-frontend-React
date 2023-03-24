@@ -19,7 +19,7 @@ import {
 } from '@material-ui/core';
 import { updateProfile } from 'src/actions/accountActions';
 
-const stateOptions = ['Alabama', 'New York', 'San Francisco'];
+const stateOptions = [ 'Bei Jing', 'Hong Kong', 'Sim Yang'];
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -36,7 +36,7 @@ function GeneralSettings({ user, className, ...rest }) {
       initialValues={{
         country: user.country,
         email: user.email,
-        username: "Katarina Smith",
+        username: "Zheng Zheng",
         state: user.state,
       }}
       validationSchema={Yup.object().shape({

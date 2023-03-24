@@ -43,21 +43,6 @@ function Results({ className, customers, ...rest }) {
             })}
         </Grid>
       </CardContent>
-     {/*       
-      <Modal open={open}  className={classes.paper}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-            timeout: 500,
-        }}
-        ><Fade in={open}>
-              <Card className={classes.modal} style={{backgroundImage : `url(${photo})`, backgroundRepeat : "none", backgroundSize : "cover"}}>
-                <Box style={{textAlign : "right"}}>               
-                <Button style={{backgroundColor : "green"}} onClick={() => setOpen(false)}>Close</Button>
-                </Box> 
-          </Card>
-        </Fade>
-        </Modal> */}
     </Card>
   );
 }

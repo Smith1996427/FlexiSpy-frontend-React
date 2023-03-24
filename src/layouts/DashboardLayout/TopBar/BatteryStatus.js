@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import {
   useDispatch,
-  useSelector
+  // useSelector
 } from 'react-redux';
 import {
   Box,
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Notifications() {
   const classes = useStyles();
-  const notifications = useSelector((state) => state.notifications.notifications);
+  // const notifications = useSelector((state) => state.notifications.notifications);
   const ref = useRef(null);
   const dispatch = useDispatch();
   const [isOpen, setOpen] = useState(false);

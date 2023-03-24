@@ -69,7 +69,7 @@ function RegisterView() {
               Sign up
             </Typography>
             <Typography variant="subtitle1">
-              Sign up on the internal platform
+              Sign up on the flexiSPY
             </Typography>
             <Box mt={3}>
               <RegisterForm onSubmitSuccess={handleSubmitSuccess} />

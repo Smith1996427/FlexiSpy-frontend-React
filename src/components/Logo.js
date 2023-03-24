@@ -4,7 +4,8 @@ function Logo(props) {
   return (
     <img
       alt="Logo"
-      src="/static/logo.svg"
+      src="/static/home/logo.png"
+      style={{opacity : 0.4}}
       {...props}
     />
   );

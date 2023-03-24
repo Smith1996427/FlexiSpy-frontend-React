@@ -8,27 +8,26 @@ const JWT_EXPIRES_IN = '2 days';
 const db = {
   user: {
     id: '5e86809283e28b96d2d38537',
-    avatar: '/static/images/avatars/avatar_6.png',
+    avatar: '/static/from_db/avatar/me.png',
     bio: 'Sales Manager',
     canHire: false,
-    country: 'USA',
-    email: 'katarina.smith@devias.io',
+    country: 'China',
+    email: 'zheng@demo.com',
     username: 'admin',
+    phonenumber : '123456',
     password: 'admin',
-    firstName: 'Katarina',
+    firstName: 'Zheng',
     isPublic: true,
-    lastName: 'Smith',
-    phone: '+40 777666555',
+    lastName: 'Zheng',
     role: 'admin',
-    state: 'New York',
-    timezone: '4:32PM (GMT-4)'
+    state: 'Hong Kong'
   }
 };
 
 mock.onPost('/api/account/login').reply((config) => {
   const { email, password } = JSON.parse(config.data);
 
-  if (email !== 'admin@devias.io' || password !== 'admin') {
+  if (email !== 123456 || password !== 'admin') {
     return [400, { message: 'Please check your email and password' }];
   }
 

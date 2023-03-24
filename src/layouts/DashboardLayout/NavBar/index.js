@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import {
   Avatar,
   Box,
-  Chip,
   Divider,
   Drawer,
   Hidden,
@@ -21,37 +20,23 @@ import {
 } from '@material-ui/core';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import {
-  Briefcase as BriefcaseIcon,
   Book as BookIcon,
-  Calendar as CalendarIcon,
-  ShoppingCart as ShoppingCartIcon,
-  Folder as FolderIcon,
-  BarChart as BarChartIcon,
   Globe as GlobeIcon,
   Lock as LockIcon,
   UserPlus as UserPlusIcon,
-  Shield as ShieldIcon,
-  AlertCircle as AlertCircleIcon,
-  Trello as TrelloIcon,
   User as UserIcon,
-  Layout as LayoutIcon,
   Layers as LayerIcon,
-  Edit as EditIcon,
-  DollarSign as DollarSignIcon,
   Mail as MailIcon,
-  MessageCircle as MessageCircleIcon,
   PieChart as PieChartIcon,
   Phone as PhoneIcon,
   PhoneCall as PhoneCallIcon,
   Camera as CameraIcon,
-  Share2 as ShareIcon,
-  Users as UsersIcon,
   Volume2 as SpeakerIcon,
   MapPin as MapPinIcon
 } from 'react-feather';
 import Logo from 'src/components/Logo';
 import NavItem from './NavItem';
-import {MdAddCall, MdWhatsapp, MdPhoneAndroid} from 'react-icons/md';
+import {MdAddCall, MdWhatsapp, MdPhoneAndroid, MdAddBusiness} from 'react-icons/md';
 import {BsCameraVideo} from 'react-icons/bs';
 
 const navConfig = [
@@ -145,259 +130,27 @@ const navConfig = [
         title: 'Device Number',
         icon: UserIcon,
         href: '/app/monitor'
+      },
+      {
+        title: 'Mobile Signal Company',
+        icon: MdAddBusiness,
+        href: '/app/signal/company'
       }
     ]
   },
-  {
-    subheader: 'Reports',
-    items: [
-      {
-        title: 'Dashboard',
-        icon: PieChartIcon,
-        href: '/app/reports/dashboard'
-      },
-      {
-        title: 'Dashboard Alternative',
-        icon: BarChartIcon,
-        href: '/app/reports/dashboard-alternative'
-      }
-    ]
-  },
-  {
-    subheader: 'Management',
-    items: [
-      {
-        title: 'Customers',
-        icon: UsersIcon,
-        href: '/app/management/customers',
-        items: [
-          {
-            title: 'List Customers',
-            href: '/app/management/customers'
-          },
-          {
-            title: 'View Customer',
-            href: '/app/management/customers/1'
-          },
-          {
-            title: 'Edit Customer',
-            href: '/app/management/customers/1/edit'
-          }
-        ]
-      },
-      {
-        title: 'Products',
-        icon: ShoppingCartIcon,
-        href: '/app/management/products',
-        items: [
-          {
-            title: 'List Products',
-            href: '/app/management/products'
-          },
-          {
-            title: 'Create Product',
-            href: '/app/management/products/create'
-          }
-        ]
-      },
-      {
-        title: 'Orders',
-        icon: FolderIcon,
-        href: '/app/management/orders',
-        items: [
-          {
-            title: 'List Orders',
-            href: '/app/management/orders'
-          },
-          {
-            title: 'View Order',
-            href: '/app/management/orders/1'
-          }
-        ]
-      },
-      {
-        title: 'Invoices',
-        icon: ReceiptIcon,
-        href: '/app/management/invoices',
-        items: [
-          {
-            title: 'List Invoices',
-            href: '/app/management/invoices'
-          },
-          {
-            title: 'View Invoice',
-            href: '/app/management/invoices/1'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    subheader: 'Applications',
-    items: [
-      {
-        title: 'Projects Platform',
-        href: '/app/projects',
-        icon: BriefcaseIcon,
-        items: [
-          {
-            title: 'Overview',
-            href: '/app/projects/overview'
-          },
-          {
-            title: 'Browse Projects',
-            href: '/app/projects/browse'
-          },
-          {
-            title: 'Create Project',
-            href: '/app/projects/create'
-          },
-          {
-            title: 'View Project',
-            href: '/app/projects/1'
-          }
-        ]
-      },
-      {
-        title: 'Social Platform',
-        href: '/app/social',
-        icon: ShareIcon,
-        items: [
-          {
-            title: 'Profile',
-            href: '/app/social/profile'
-          },
-          {
-            title: 'Feed',
-            href: '/app/social/feed'
-          }
-        ]
-      },
-      {
-        title: 'Kanban',
-        href: '/app/kanban',
-        icon: TrelloIcon
-      },
-      {
-        title: 'Mail',
-        href: '/app/mail',
-        icon: MailIcon,
-        info: () => (
-          <Chip
-            color="secondary"
-            size="small"
-            label="Updated"
-          />
-        )
-      },
-      {
-        title: 'Chat',
-        href: '/app/chat',
-        icon: MessageCircleIcon,
-        info: () => (
-          <Chip
-            color="secondary"
-            size="small"
-            label="Updated"
-          />
-        )
-      },
-      {
-        title: 'Calendar',
-        href: '/app/calendar',
-        icon: CalendarIcon
-      },
-    ]
-  },
+
   {
     subheader: 'Auth',
     items: [
       {
         title: 'Login',
-        href: '/login-unprotected',
+        href: '/login',
         icon: LockIcon
       },
       {
         title: 'Register',
-        href: '/register-unprotected',
-        icon: UserPlusIcon
-      },
-      {
-        title: 'Login: Guest Protected',
-        href: '/login',
-        icon: ShieldIcon
-      },
-      {
-        title: 'Register: Guest Protected',
         href: '/register',
-        icon: ShieldIcon
-      }
-    ]
-  },
-  {
-    subheader: 'Pages',
-    href: '/app/pages',
-    items: [
-      {
-        title: 'Account',
-        href: '/app/account',
-        icon: UserIcon
-      },
-      {
-        title: 'Error',
-        href: '/404',
-        icon: AlertCircleIcon
-      },
-      {
-        title: 'Pricing',
-        href: '/pricing',
-        icon: DollarSignIcon
-      }
-    ]
-  },
-  {
-    subheader: 'Extra',
-    items: [
-      {
-        title: 'Charts',
-        href: '/app/extra/charts',
-        icon: BarChartIcon,
-        items: [
-          {
-            title: 'Apex Charts',
-            href: '/app/extra/charts/apex'
-          }
-        ]
-      },
-      {
-        title: 'Forms',
-        href: '/app/extra/forms',
-        icon: EditIcon,
-        items: [
-          {
-            title: 'Formik',
-            href: '/app/extra/forms/formik'
-          },
-          {
-            title: 'Redux Forms',
-            href: '/app/extra/forms/redux'
-          },
-        ]
-      },
-      {
-        title: 'Editors',
-        href: '/app/extra/editors',
-        icon: LayoutIcon,
-        items: [
-          {
-            title: 'DraftJS Editor',
-            href: '/app/extra/editors/draft-js'
-          },
-          {
-            title: 'Quill Editor',
-            href: '/app/extra/editors/quill'
-          }
-        ]
+        icon: UserPlusIcon
       }
     ]
   }
@@ -525,7 +278,7 @@ function NavBar({ openMobile, onMobileClose, }) {
           >
             <Link
               component={RouterLink}
-              to="/app/account"
+              to="/app/account/profile"
               variant="h5"
               color="textPrimary"
               underline="none"
@@ -536,7 +289,7 @@ function NavBar({ openMobile, onMobileClose, }) {
               variant="body2"
               color="textSecondary"
             >
-              1800525414
+              {user.phonenumber}
             </Typography>
           </Box>
         </Box>

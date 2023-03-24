@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
     width: 64
   },
   media: {
+    opacity : 0.6,
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
     padding: theme.spacing(3),
@@ -118,7 +119,7 @@ function LoginView() {
               variant="subtitle1"
               color="textSecondary"
             >
-              Sign in on the internal platform
+              Sign in on the flexiSPY 
             </Typography>
             <Box mt={2}>
               <Alert
@@ -127,7 +128,7 @@ function LoginView() {
                 <div>
                   Use
                   {' '}
-                  <b>admin@devias.io</b>
+                  <b>123456</b>
                   {' '}
                   and password
                   {' '}
@@ -152,40 +153,9 @@ function LoginView() {
           </CardContent>
           <CardMedia
             className={classes.media}
-            image="/static/images/auth.png"
+            image="/static/from_db/auth.png"
             title="Cover"
           >
-            <Typography
-              color="inherit"
-              variant="subtitle1"
-            >
-              Hella narvwhal Cosby sweater McSweeney&apos;s,
-              salvia kitsch before they sold out High Life.
-            </Typography>
-            <Box
-              alignItems="center"
-              display="flex"
-              mt={3}
-            >
-              <Avatar
-                alt="Person"
-                src="/static/images/avatars/avatar_2.png"
-              />
-              <Box ml={3}>
-                <Typography
-                  color="inherit"
-                  variant="body1"
-                >
-                  Ekaterina Tankova
-                </Typography>
-                <Typography
-                  color="inherit"
-                  variant="body2"
-                >
-                  Manager at inVision
-                </Typography>
-              </Box>
-            </Box>
           </CardMedia>
         </Card>
       </Container>

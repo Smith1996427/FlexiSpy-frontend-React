@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    minHeight : "320px"
+    minHeight : "250px",
+    marginLeft : "10%",
+    marginRight : "10%"
   },
   label: {
     marginLeft: theme.spacing(1)

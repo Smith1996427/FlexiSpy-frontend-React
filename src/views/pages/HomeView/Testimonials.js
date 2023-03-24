@@ -11,9 +11,9 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
-    paddingTop: 128,
-    paddingBottom: 128
+    backgroundColor: theme.palette.background.default,
+    paddingTop: 50,
+    paddingBottom: 50
   },
   title: {
     fontWeight: theme.typography.fontWeightRegular
@@ -35,9 +35,7 @@ function Testimonials({ className, ...rest }) {
           color="textPrimary"
           className={classes.title}
         >
-          &quot;Devias builds some of the best templates you can find for React.
-          <br />
-          They will save you time.&quot;
+          &quot;By using this site you can get a lot of phone information.&quot;
         </Typography>
         <Box
           mt={6}
@@ -45,19 +43,19 @@ function Testimonials({ className, ...rest }) {
           justifyContent="center"
           alignItems="center"
         >
-          <Avatar src="/static/home/olivier.png" />
+          <Avatar src="/static/from_db/avatar/me.png" />
           <Box ml={2}>
             <Typography
               variant="body1"
               color="textPrimary"
             >
-              Olivier Tassinari
+              Dev team @ Creator
               <Typography
                 color="textSecondary"
                 display="inline"
                 component="span"
               >
-                , co-creator of @MaterialUI
+                , 2023.3
               </Typography>
             </Typography>
           </Box>

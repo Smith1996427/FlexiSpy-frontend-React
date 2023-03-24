@@ -3,20 +3,20 @@ import React, {
   useState,
   useEffect
 } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
 import {
   useDispatch,
-  useSelector
+  // useSelector
 } from 'react-redux';
 import {
-  Avatar,
+  // Avatar,
   Box,
-  Button,
+  // Button,
   IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
+  // List,
+  // ListItem,
+  // ListItemAvatar,
+  // ListItemText,
   Popover,
   SvgIcon,
   Tooltip,
@@ -25,17 +25,17 @@ import {
 } from '@material-ui/core';
 import {
   Bell as BellIcon,
-  Package as PackageIcon,
-  MessageCircle as MessageIcon,
-  Truck as TruckIcon
+  // Package as PackageIcon,
+  // MessageCircle as MessageIcon,
+  // Truck as TruckIcon
 } from 'react-feather';
 import { getNotifications } from 'src/actions/notificationsActions';
 
-const iconsMap = {
-  order_placed: PackageIcon,
-  new_message: MessageIcon,
-  item_shipped: TruckIcon
-};
+// const iconsMap = {
+//   order_placed: PackageIcon,
+//   new_message: MessageIcon,
+//   item_shipped: TruckIcon
+// };
 
 const useStyles = makeStyles((theme) => ({
   popover: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Notifications() {
   const classes = useStyles();
-  const notifications = useSelector((state) => state.notifications.notifications);
+  // const notifications = useSelector((state) => state.notifications.notifications);
   const ref = useRef(null);
   const dispatch = useDispatch();
   const [isOpen, setOpen] = useState(false);

@@ -28,15 +28,15 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
     <Formik
       initialValues={{
         firstName: '',
-        lastName: '',
         email: '',
+        phone : '',
         password: '',
         policy: false
       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string().max(255).required('First name is required'),
-        lastName: Yup.string().max(255).required('Last name is required'),
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+        phone: Yup.number().required('Phone number is required'),
         password: Yup.string().min(7).max(255).required('Password is required'),
         policy: Yup.boolean().oneOf([true], 'This field must be checked')
       })}
@@ -73,26 +73,13 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
             error={Boolean(touched.firstName && errors.firstName)}
             fullWidth
             helperText={touched.firstName && errors.firstName}
-            label="First Name"
+            label="User Name"
             margin="normal"
             name="firstName"
             onBlur={handleBlur}
             onChange={handleChange}
             type="firstName"
             value={values.firstName}
-            variant="outlined"
-          />
-          <TextField
-            error={Boolean(touched.lastName && errors.lastName)}
-            fullWidth
-            helperText={touched.lastName && errors.lastName}
-            label="Last Name"
-            margin="normal"
-            name="lastName"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            type="lastName"
-            value={values.lastName}
             variant="outlined"
           />
           <TextField
@@ -106,6 +93,19 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
             onChange={handleChange}
             type="email"
             value={values.email}
+            variant="outlined"
+          />
+            <TextField
+            error={Boolean(touched.phone && errors.phone)}
+            fullWidth
+            helperText={touched.phone && errors.phone}
+            label="Phone number"
+            margin="normal"
+            name="phone"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            type="number"
+            value={values.phone}
             variant="outlined"
           />
           <TextField

@@ -54,7 +54,7 @@ function ProfileDetails({ user, className, ...rest }) {
             color="textPrimary"
             variant="body1"
           >
-            1800525414
+            {user.phonenumber}
           </Typography>
           <Typography
             color="textPrimary"

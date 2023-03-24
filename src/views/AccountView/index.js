@@ -31,10 +31,10 @@ function AccountView() {
   const tabs = [
     { value: 'general', label: 'General' },
     { value: 'security', label: 'Security' },
-    { value: 'order', label: 'Order Profile' },
+    // { value: 'order', label: 'Order Profile' },
     { value: 'contact', label: 'Contact support' },
-    { value: 'licence', label: 'By a new licence' },
-    { value: 'billing', label: 'Billing Note' }
+    // { value: 'licence', label: 'By a new licence' },
+    // { value: 'billing', label: 'Billing Note' }
   
   ];
 

@@ -47,34 +47,38 @@ function DashboardView() {
         >
           <Grid
             item
-            lg={4}
+            lg={6}
             sm={6}
             xs={12}
           >
             <DeviceInfo />
           </Grid>
-          <Grid
+          {/* <Grid
             item
             lg={4}
             sm={6}
             xs={12}
           >
             <ProductInfo />
-          </Grid>
+          </Grid> */}
           <Grid
             item
-            lg={4}
+            lg={6}
             sm={6}
             xs={12}
           >
             <Account />
           </Grid>
-
-
+        </Grid>
+        <Grid
+          container
+          spacing={3}
+          style = {{marginTop : "80px"}}
+        >
           <Grid
             item
             lg={4}
-            sm={6}
+            sm={12}
             xs={12}
           >
             <LastCall />

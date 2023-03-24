@@ -13,7 +13,7 @@ import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Header from './Header';
 import Results from './Results';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,8 +30,8 @@ function CustomerListView() {
   const isMountedRef = useIsMountedRef();
   const [logs, setLogs] = useState(null);
 
-  const params = useParams();
-  var Id = params.id;
+  // const params = useParams();
+  // var Id = params.id;
 
   const getLogs = useCallback(() => {
     axios

@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import {
   AppBar,
   Box,
-  Button,
-  Divider,
   Toolbar,
   Hidden,
   Typography,
@@ -74,16 +72,6 @@ function TopBar({ className, ...rest }) {
         >
           Dashboard
         </Link>
-        <Divider className={classes.divider} />
-        <Button
-          color="secondary"
-          component="a"
-          href="https://material-ui.com/store/items/devias-kit-pro"
-          variant="contained"
-          size="small"
-        >
-          Get the kit
-        </Button>
       </Toolbar>
     </AppBar>
   );

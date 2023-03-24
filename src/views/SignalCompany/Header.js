@@ -54,14 +54,14 @@ function Header({ className, ...rest }) {
             to="#"
             component={RouterLink}
           >
-            Device
+            company
           </Link>
         </Breadcrumbs>
         <Typography
           variant="h3"
           color="textPrimary"
         >
-          Device Number
+          Mobile Signal Company
         </Typography>
       </Grid>
     </Grid>

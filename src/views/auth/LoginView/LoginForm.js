@@ -24,11 +24,11 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
   return (
     <Formik
       initialValues={{
-        email: 'admin@devias.io',
+        email: 123456,
         password: 'admin'
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+        email: Yup.number().required('Email is required'),
         password: Yup.string().max(255).required('Password is required')
       })}
       onSubmit={async (values, {
@@ -68,12 +68,12 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
             fullWidth
             autoFocus
             helperText={touched.email && errors.email}
-            label="Email Address"
+            label="Phone Number"
             margin="normal"
             name="email"
             onBlur={handleBlur}
             onChange={handleChange}
-            type="email"
+            type="number"
             value={values.email}
             variant="outlined"
           />
