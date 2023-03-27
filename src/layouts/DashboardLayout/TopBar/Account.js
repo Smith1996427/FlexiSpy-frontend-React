@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Account() {
+function Account({backtome, ...rest}) {
   const classes = useStyles();
   const history = useHistory();
   const ref = useRef(null);
@@ -59,7 +59,7 @@ function Account() {
   };
 
   return (
-    <>
+    <div onClick={backtome}>
       <Box
         display="flex"
         alignItems="center"
@@ -97,13 +97,13 @@ function Account() {
           component={RouterLink}
           to="/app/account/profile"
         >
-          Account
+         My Account
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           Logout
         </MenuItem>
       </Menu>
-    </>
+    </div>
   );
 }
 

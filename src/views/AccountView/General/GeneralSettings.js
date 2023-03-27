@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 import {
   Box,
@@ -11,70 +9,85 @@ import {
   Card,
   CardContent,
   CardHeader,
+  CircularProgress,
   Divider,
-  FormHelperText,
   Grid,
   TextField,
   makeStyles
 } from '@material-ui/core';
-import { updateProfile } from 'src/actions/accountActions';
+import { addUserPhoneNumbers } from 'src/actions/userPhoneNumbersActions';
+import wait from 'src/utils/wait';
+import PhoneInput from 'react-phone-number-input/input'
+import { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
+import ReactInputVerificationCode from "react-input-verification-code";
 
-const stateOptions = [ 'Bei Jing', 'Hong Kong', 'Sim Yang'];
+
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {},
+  phonInput : {
+    fontSize : "16px", 
+    width : '100%', 
+    marginTop:"16px", 
+    padding:"18px", 
+    borderRadius : "5px",
+    backgroundColor : "rgba(0,0,0,0)",
+    border :"solid 1px grey",
+    color : "currentColor"
+   }
 }));
 
-function GeneralSettings({ user, className, ...rest }) {
+function GeneralSettings({ user, phone, className, ...rest }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
+  const [addPhone, setAddPhone] = useState("");
+  const [verify, setVerify] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const [value,  setValue] = useState();
+
+  const handlePhone = (e) => {
+    setValue(formatPhoneNumberIntl(e));
+  }
+
+ const handleVerify = () => {
+  setVerify(true);
+  enqueueSnackbar("Please input verification code!", {
+    variant: 'success',
+  }); 
+}
+
+const handleback = () => {
+  setVerify(false);
+};
+
+const handleconfirm = (e) => {
+  // setLoading(true);
+  // await wait(2000);
+  // setLoading(false);
+
+
+  // setVerify(false);
+  // enqueueSnackbar("You added a phone successfully!", {
+  //   variant: 'success',
+  // }); 
+console.log(value)
+   if(e.length >= 6)
+   {
+      enqueueSnackbar("your verification success!", {
+        variant: 'success',
+       }); 
+       dispatch(addUserPhoneNumbers(value));
+       setVerify(false);
+   }
+     
+    // 
+ };
 
   return (
-    <Formik
-      enableReinitialize
-      initialValues={{
-        country: user.country,
-        email: user.email,
-        username: "Zheng Zheng",
-        state: user.state,
-      }}
-      validationSchema={Yup.object().shape({
-        country: Yup.string().max(255).required('Country is required'),
-        email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-        username: Yup.string().max(255).required('User name is required')
-      })}
-      onSubmit={async (values, {
-        resetForm,
-        setErrors,
-        setStatus,
-        setSubmitting
-      }) => {
-        try {
-          await dispatch(updateProfile(values));
-          resetForm();
-          setStatus({ success: true });
-          enqueueSnackbar('Profile updated', {
-            variant: 'success'
-          });
-        } catch (error) {
-          setStatus({ success: false });
-          setErrors({ submit: error.message });
-        } finally {
-          setSubmitting(false);
-        }
-      }}
-    >
-      {({
-        errors,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        touched,
-        values
-      }) => (
-        <form onSubmit={handleSubmit}>
+   
           <Card
             className={clsx(classes.root, className)}
             {...rest}
@@ -82,6 +95,7 @@ function GeneralSettings({ user, className, ...rest }) {
             <CardHeader title="Profile" />
             <Divider />
             <CardContent>
+              {(!verify) && (!loading) &&
               <Grid
                 container
                 spacing={4}
@@ -92,35 +106,12 @@ function GeneralSettings({ user, className, ...rest }) {
                   xs={12}
                 >
                   <TextField
-                    error={Boolean(touched.firstName && errors.firstName)}
                     fullWidth
-                    helperText={touched.firstName && errors.firstName}
                     label="User Name"
                     name="username"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    required
+                    disabled
                     type="text"
-                    value={values.username}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    error={Boolean(touched.email && errors.email)}
-                    fullWidth
-                    helperText={touched.email && errors.email ? errors.email : 'We will use this email to contact you'}
-                    label="Email Address"
-                    name="email"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    required
-                    type="email"
-                    value={values.email}
+                    value="zhen zhen"
                     variant="outlined"
                   />
                 </Grid>
@@ -131,71 +122,147 @@ function GeneralSettings({ user, className, ...rest }) {
                 >
                   <TextField
                     fullWidth
-                    label="Select State"
-                    name="state"
-                    onChange={handleChange}
-                    select
-                    SelectProps={{ native: true }}
-                    value={values.state}
+                    label="Current Phone Number"
+                    name="currentPhone"
+                     disabled
+                    type="text"
+                    value={phone}
                     variant="outlined"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  md={6}
+                  xs={12}
+                >
+                  {/* <TextField
+                    fullWidth
+                    label="Add new phone number"
+                    name="newNumber"
+                    type="number"
+                    onChange={handleAddPhone}
+                    value={addPhone}
+                    variant="outlined"
+                  /> */}
+
+            <PhoneInput
+            className={classes.phonInput}
+             placeholder="Enter phone number"
+             value={value}
+             onChange={(e) => handlePhone(e)}
+             />
+                </Grid>
+                <Grid
+                  item
+                  md={6}
+                  xs={12}
+                >
+                  <Box
+                    p={2}
+                    display="flex"
+                    justifyContent="flex-end"
                   >
-                    {stateOptions.map((state) => (
-                      <option
-                        key={state}
-                        value={state}
-                      >
-                        {state}
-                      </option>
-                    ))}
-                  </TextField>
-                </Grid>
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    error={Boolean(touched.country && errors.country)}
-                    fullWidth
-                    helperText={touched.country && errors.country}
-                    label="Country"
-                    name="country"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    required
-                    type="country"
-                    value={values.country}
-                    variant="outlined"
-                  />
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      onClick={() => handleVerify()}
+                    >
+                      Add Phone
+                    </Button>
+                  </Box>
                 </Grid>
               </Grid>
-              {errors.submit && (
-                <Box mt={3}>
-                  <FormHelperText error>
-                    {errors.submit}
-                  </FormHelperText>
-                </Box>
-              )}
+              }
+              {(verify)  && 
+              //  <Grid container justify='space-between' spacing={1}>
+              //  <Grid item md={2} xs = {2}>
+              //  <TextField
+              //     fullWidth
+              //     name="code"
+              //     margin="normal"
+              //     type="number"
+              //     variant="outlined"
+              //   />               
+              //  </Grid>
+              //  <Grid item md={2} xs = {2}>
+              //  <TextField
+              //     fullWidth
+              //     name="code"
+              //     margin="normal"
+              //     type="number"
+              //     variant="outlined"
+              //   />               
+              //  </Grid>
+              //  <Grid item md={2} xs = {2}>
+              //  <TextField
+              //     fullWidth
+              //     name="code"
+              //     margin="normal"
+              //     type="number"
+              //     variant="outlined"
+              //   />               
+              //  </Grid>
+              //  <Grid item md={2} xs = {2}>
+              //  <TextField
+              //     fullWidth
+              //     name="code"
+              //     margin="normal"
+              //     type="number"
+              //     variant="outlined"
+              //   />               
+              //  </Grid>
+              //  <Grid item md={2} xs = {2}>
+              //  <TextField
+              //     fullWidth
+              //     name="code"
+              //     margin="normal"
+              //     type="number"
+              //     variant="outlined"
+              //   />               
+              //  </Grid>
+              //  <Grid item md={2} xs = {2}>
+              //  <TextField
+              //     fullWidth
+              //     name="code"
+              //     margin="normal"
+              //     type="number"
+              //     variant="outlined"
+              //   />               
+              //  </Grid>
+              //  <Grid item>
+              //   <Button
+              //     color="secondary"
+              //     size="small"
+              //     variant="contained"
+              //     onClick={() => handleback()}
+              //   >
+              //     Back
+              //   </Button>
+              //  </Grid>
+              //  <Grid item>
+              //   <Button
+              //     color="secondary"
+              //     size="small"
+              //     variant="contained"
+              //     onClick={() => handleconfirm()}
+              //   >
+              //     Confirm
+              //   </Button>
+              //  </Grid>
+              // </Grid>
+              <ReactInputVerificationCode
+              length={6}
+              autoFocus
+              placeholder=""
+              onChange={handleconfirm}
+            />
+              } 
+              {(loading)  &&
+              <CircularProgress />
+              }
             </CardContent>
             <Divider />
-            <Box
-              p={2}
-              display="flex"
-              justifyContent="flex-end"
-            >
-              <Button
-                color="secondary"
-                disabled={isSubmitting}
-                type="submit"
-                variant="contained"
-              >
-                Save Changes
-              </Button>
-            </Box>
           </Card>
-        </form>
-      )}
-    </Formik>
   );
 }
 

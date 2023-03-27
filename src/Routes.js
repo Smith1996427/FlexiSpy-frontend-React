@@ -38,6 +38,11 @@ const routesConfig = [
     component: lazy(() => import('src/views/auth/RegisterView'))
   },
   {
+    exact: true,
+    path: '/forgot',
+    component: lazy(() => import('src/views/auth/forgotPassword'))
+  },
+  {
     path: '/app',
     guard: AuthGuard,
     layout: DashboardLayout,
@@ -148,6 +153,11 @@ const routesConfig = [
         path: '/app/signal/company',
         component: lazy(() => import('src/views/SignalCompany'))    
       },
+      {
+        exact: true,
+        path: '/app/account/myusers',
+        component: lazy(() => import('src/views/MyUsers'))    
+      }
     ]
   },
   {

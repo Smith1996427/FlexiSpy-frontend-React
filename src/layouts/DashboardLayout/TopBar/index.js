@@ -20,6 +20,9 @@ import Account from './Account';
 import Notifications from './Notifications';
 import BatteryStatus from './BatteryStatus';
 import Settings from './Settings';
+import {useDispatch } from 'react-redux';
+import { updateUser } from 'src/actions/accountActions';
+import { addUserPhoneNumbers } from 'src/actions/userPhoneNumbersActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,6 +46,12 @@ function TopBar({
   ...rest
 }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const BackToMe = () => {
+    dispatch(updateUser("Me"));
+    dispatch(addUserPhoneNumbers(["+1 234 567 8987"]));
+  }
 
   return (
     <AppBar
@@ -72,11 +81,12 @@ function TopBar({
         />
         {/* <Search />
         <Contacts /> */}
+        {/* <SelectPhone /> */}
         <BatteryStatus />
         <Notifications />
         <Settings />
         <Box ml={2}>
-          <Account />
+          <Account backtome = {BackToMe}/>
         </Box>
       </Toolbar>
     </AppBar>

@@ -8,6 +8,7 @@ export const SILENT_LOGIN = '@account/silent-login';
 export const LOGOUT = '@account/logout';
 export const REGISTER = '@account/register';
 export const UPDATE_PROFILE = '@account/update-profile';
+export const UPDATE_USER = '@accounts/upadte-user';
 
 export function login(email, password) {
   return async (dispatch) => {
@@ -58,6 +59,17 @@ export function updateProfile(update) {
   return (dispatch) => {
     request.then((response) => dispatch({
       type: UPDATE_PROFILE,
+      payload: response.data
+    }));
+  };
+}
+
+export function updateUser(update) {
+  const request = axios.post('/api/accounts/update', { update });
+
+  return (dispatch) => {
+    request.then((response) => dispatch({
+      type: UPDATE_USER,
       payload: response.data
     }));
   };

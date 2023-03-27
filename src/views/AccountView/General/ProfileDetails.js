@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ProfileDetails({ user, className, ...rest }) {
+function ProfileDetails({ user,phone, phoneNumbers, className, ...rest }) {
   const classes = useStyles();
 
   return (
@@ -54,20 +54,29 @@ function ProfileDetails({ user, className, ...rest }) {
             color="textPrimary"
             variant="body1"
           >
-            {user.phonenumber}
+            Selected Phone : {phone}
           </Typography>
+          <Box mt={3}>
           <Typography
             color="textPrimary"
             variant="body1"
           >
-            {`${user.state}, ${user.country}`}
+            My Phones :
           </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body2"
-          >
-            {user.timezone}
-          </Typography>
+          {
+          phoneNumbers.map((phoneNumber) => {
+                return (
+                <Typography
+                key={phoneNumber}
+                  color="textPrimary"
+                  variant="body1"
+                >
+                   {phoneNumber}
+                </Typography>
+                )
+              })
+          }
+        </Box>
         </Box>
       </CardContent>
       <CardActions>

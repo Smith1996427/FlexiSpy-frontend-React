@@ -20,7 +20,6 @@ import RegisterForm from './RegisterForm';
 import { useSnackbar } from 'notistack';
 import ReactInputVerificationCode from "react-input-verification-code";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     justifyContent: 'center',
@@ -41,7 +40,24 @@ function RegisterView() {
   const { enqueueSnackbar } = useSnackbar();
 
 
+  const handleconfirm = (e) => {    
+    //  var receive = e;
+     
+    if(e.length >= 6)
+    {
+       enqueueSnackbar("your verification code invalid!", {
+         variant: 'error',
+        }); 
+    }
+  //  enqueueSnackbar("your code has been verified. Please login again!", {
+  //    variant: 'success',
+  //  }); 
+  //   history.push('/app/login');
+  };
+
+
   const handleSubmitSuccess = () => {
+    console.log("fd")
      setVerify(true)
     enqueueSnackbar("Please input verification code!", {
       variant: 'success',
@@ -52,20 +68,12 @@ function RegisterView() {
   const handleback = () => {
     setVerify(false);
  };
- const handleconfirm = (e) => {    
-  //  var receive = e;
-   
-  if(e.length >= 6)
-  // {
-  //    enqueueSnackbar("your verification code invalid!", {
-  //      variant: 'error',
-  //     }); 
-  // }
-{ enqueueSnackbar("your code has been verified. Please login again!", {
-   variant: 'success',
- }); 
-  history.push('/app/login');}
-};
+//  const handleconfirm = () => {
+//  enqueueSnackbar("your code has been verified. Please login again!", {
+//    variant: 'success',
+//  }); 
+//   history.push('/app/login');
+// };
 
   return (
     <Page
@@ -96,18 +104,11 @@ function RegisterView() {
               variant="h2"
               color="textPrimary"
             >
-              Sign up
+              Forgot Password?
             </Typography>
-            {(!verify) &&
             <Typography variant="subtitle1">
-              Please sign up on the flexiSPY
+              We will send a verification code to your phone 
             </Typography>
-            }
-             {(verify) &&
-            <Typography variant="subtitle1">
-              Please input verification code
-            </Typography>
-            }
             <Box mt={3}>
               {(!verify) &&
               <RegisterForm onSubmitSuccess={handleSubmitSuccess} />
@@ -195,7 +196,6 @@ function RegisterView() {
                 placeholder=""
                 onChange={handleconfirm}
               />
-          
                }
             </Box>
             <Box my={2}>
@@ -207,7 +207,7 @@ function RegisterView() {
               variant="body2"
               color="textSecondary"
             >
-              Have you account yet?
+              Back
             </Link>
           </CardContent>
         </Card>

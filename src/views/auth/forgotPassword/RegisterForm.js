@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 // import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import * as Yup from 'yup';
@@ -16,28 +16,28 @@ import {
 } from '@material-ui/core';
 // import { register } from 'src/actions/accountActions';
 import { useSnackbar } from 'notistack';
-// import 'react-phone-number-input/style.css';
-// import PhoneInput from 'react-phone-number-input';
-  import { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input';
 import PhoneInput from 'react-phone-number-input/input';
-import en from 'react-phone-number-input/locale/en';
-import CountrySelect from './countrySelect.js';
-
+import { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input';
 
 const useStyles = makeStyles(() => ({
   root: {},
+  phonInput : {
+    fontSize : "16px", 
+    width : '100%', 
+    marginTop:"16px", 
+    padding:"18px", 
+    borderRadius : "5px",
+    backgroundColor : "rgba(0,0,0,0)",
+    border :"solid 1px grey",
+    color : "currentColor"
+   }
 }));
-
-
-
 
 function RegisterForm({ className, onSubmitSuccess, ...rest }) {
   const classes = useStyles();
   // const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-
   const [value,  setValue] = useState();
-  const [country, setCountry] = useState('US')
 
   const handlePhone = (e) => {
     setValue(formatPhoneNumberIntl(e));
@@ -68,17 +68,15 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
       }) => {
         try {
           // await dispatch(register(values));
-          if(value === "")
-          enqueueSnackbar("You must im", {
-            variant: 'error',
-           })
-          else
-          {
-           enqueueSnackbar("We sent verification code to your phone", {
+          if(values.firstName === "zhen zhen")
+           {enqueueSnackbar("We sent verification code to your phone", {
             variant: 'success',
-           })
-          onSubmitSuccess();
-          }
+          }); 
+          onSubmitSuccess();}
+          else
+          enqueueSnackbar("User name is incorrect!", {
+            variant: 'error',
+          }); 
         } catch (error) {
           setStatus({ success: false });
           setErrors({ submit: error.message });
@@ -113,48 +111,17 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
             value={values.firstName}
             variant="outlined"
           />
-            {/* <TextField
-            error={Boolean(touched.phone && errors.phone)}
-            fullWidth
-            helperText={touched.phone && errors.phone}
-            label="Phone number"
-            margin="normal"
-            name="phone"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            type="number"
-            value={values.phone}
-            variant="outlined"
-          /> */}
-{/* 
-          <PhoneInput
-            style={{
-              flex: 1,
-              minWidth: 0,
-              outline: 'none',
-              border: 'none',
-              paddingTop: 5,
-              paddingBottom: 5,     
-            }}
-            value={value}
-            onChange={(e) => handlePhone(e)}
-          /> */}
-       <CountrySelect
-        labels={en}
-        value={country}
-        onChange={setCountry}/>
-      <PhoneInput
-        country={country}
-        value={value}
-        onChange={setValue}/>
-
-
-
+           <PhoneInput
+            className={classes.phonInput}
+             placeholder="Enter phone number"
+             value={value}
+             onChange={(e) => handlePhone(e)}
+             />
           <TextField
             error={Boolean(touched.password && errors.password)}
             fullWidth
             helperText={touched.password && errors.password}
-            label="Password"
+            label="New Password"
             margin="normal"
             name="password"
             onBlur={handleBlur}

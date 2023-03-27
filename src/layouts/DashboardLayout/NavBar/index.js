@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import { useLocation, matchPath } from 'react-router';
 import { Link as RouterLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,   useDispatch } from 'react-redux';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import {
@@ -15,15 +15,13 @@ import {
   Link,
   List,
   ListSubheader,
-  Typography,
+  TextField,
   makeStyles
 } from '@material-ui/core';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import {
   Book as BookIcon,
   Globe as GlobeIcon,
-  Lock as LockIcon,
-  UserPlus as UserPlusIcon,
   User as UserIcon,
   Layers as LayerIcon,
   Mail as MailIcon,
@@ -32,12 +30,14 @@ import {
   PhoneCall as PhoneCallIcon,
   Camera as CameraIcon,
   Volume2 as SpeakerIcon,
-  MapPin as MapPinIcon
+  MapPin as MapPinIcon,
+  Users as UsersIcon
 } from 'react-feather';
 import Logo from 'src/components/Logo';
 import NavItem from './NavItem';
 import {MdAddCall, MdWhatsapp, MdPhoneAndroid, MdAddBusiness} from 'react-icons/md';
 import {BsCameraVideo} from 'react-icons/bs';
+import { updateProfile } from 'src/actions/currentPhoneActions';
 
 const navConfig = [
   {
@@ -132,29 +132,120 @@ const navConfig = [
         href: '/app/monitor'
       },
       {
-        title: 'Mobile Signal Company',
+        title: 'Signal Company',
         icon: MdAddBusiness,
         href: '/app/signal/company'
       }
     ]
-  },
+  }
+];
 
+
+const navConfigAgent = [
   {
-    subheader: 'Auth',
+    // subheader: 'Reports',
+    subheader: ' ',
     items: [
       {
-        title: 'Login',
-        href: '/login',
-        icon: LockIcon
+        title: 'Dashboard',
+        icon: PieChartIcon,
+        href: '/app/dashboard'
       },
       {
-        title: 'Register',
-        href: '/register',
-        icon: UserPlusIcon
+        title: 'Account',
+        icon: UserIcon,
+        href: '/app/account/profile'
+      },
+      {
+        title: 'My Users',
+        icon: UsersIcon,
+        href: '/app/account/myusers'
+      },
+      {
+        title: 'Data',
+        icon: LayerIcon,
+        items: [
+          {
+            title: 'Call Log',
+            icon: PhoneIcon,
+            href: '/app/data/call/log/list'
+          },
+          {
+            title: 'Call Recording',
+            icon: PhoneCallIcon,
+            href: '/app/data/call/recordings'
+          },
+          {
+            title: 'VoIP',
+            icon: MdAddCall,
+            href: '/app/data/voip/list'
+          },
+          {
+            title: 'VoIP Records',
+            icon: MdWhatsapp,
+            href: '/app/data/voip/records'
+          },
+          {
+            title: 'Emails',
+            icon: MailIcon,
+            href: '/app/data/messages'
+          },
+          {
+            title: 'Photos',
+            icon: CameraIcon,
+            href: '/app/data/photos'
+          },
+          {
+            title: 'Videos',
+            icon: BsCameraVideo,
+            href: '/app/data/videos'
+          }
+          ,
+          {
+            title: 'Audios',
+            icon: SpeakerIcon,
+            href: '/app/data/audios'
+          },
+          {
+            title: 'Documents',
+            icon: ReceiptIcon,
+            href: '/app/data/documents'
+          },
+          {
+            title: 'Locations',
+            icon: MapPinIcon,
+            href: '/app/data/locations'
+          },
+          {
+            title: 'App Activity',
+            icon: MdPhoneAndroid,
+            href: '/app/data/application/history'
+          },
+          {
+            title: 'Web Activity',
+            icon: GlobeIcon,
+            href: '/app/data/web/history'
+          },
+          {
+            title: 'Address Book',
+            icon: BookIcon,
+            href: '/app/data/addressbook'
+          }
+        ]
+      },
+      {
+        title: 'Device Number',
+        icon: UserIcon,
+        href: '/app/monitor'
+      },
+      {
+        title: 'Signal Company',
+        icon: MdAddBusiness,
+        href: '/app/signal/company'
       }
     ]
   }
-];
+]
 
 function renderNavItems({ items, ...rest }) {
   return (
@@ -215,10 +306,10 @@ function reduceChildRoutes({
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
-    width: 256
+    width: 210
   },
   desktopDrawer: {
-    width: 256,
+    width: 210,
     top: 64,
     height: 'calc(100% - 64px)'
   },
@@ -226,13 +317,31 @@ const useStyles = makeStyles(() => ({
     cursor: 'pointer',
     width: 64,
     height: 64
+  },
+  avatar1: {
+    cursor: 'pointer',
+    width: 48,
+    height: 48
   }
 }));
+
 
 function NavBar({ openMobile, onMobileClose, }) {
   const classes = useStyles();
   const location = useLocation();
   const { user } = useSelector((state) => state.account);
+  const { users } = useSelector((state) => state.accounts);
+
+  const dispatch = useDispatch();
+  const [currentPhone, setCurrentPhone] = useState("");
+
+  const { phoneNumbers } = useSelector((state) => state.userPhones);
+
+  const handlePhoneChange = (e) => {
+    setCurrentPhone(e.target.value)
+    dispatch(updateProfile(e.target.value));
+  }
+
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -268,7 +377,7 @@ function NavBar({ openMobile, onMobileClose, }) {
               <Avatar
                 alt="User"
                 className={classes.avatar}
-                src={user.avatar}
+                src={users.avatar}
               />
             </RouterLink>
           </Box>
@@ -283,19 +392,31 @@ function NavBar({ openMobile, onMobileClose, }) {
               color="textPrimary"
               underline="none"
             >
-              {`${user.firstName} ${user.lastName}`}
+              {users.name} 
             </Link>
-            <Typography
-              variant="body2"
-              color="textSecondary"
+            <br />
+            <TextField
+              name="phone"
+              onChange={handlePhoneChange}
+              select
+              SelectProps={{ native: true }}
+              value={currentPhone}
             >
-              {user.phonenumber}
-            </Typography>
+              {phoneNumbers.map((state) => (
+                <option
+                  key={state}
+                  value={state}
+                >
+                  {state}
+                </option>
+              ))}
+            </TextField>
           </Box>
         </Box>
-        <Divider />
+        <Divider /> 
         <Box p={2}>
-          {navConfig.map((config) => (
+          {(users.role === ("agent")) &&
+          navConfigAgent.map((config) => (
             <List
               key={config.subheader}
               subheader={(
@@ -309,7 +430,25 @@ function NavBar({ openMobile, onMobileClose, }) {
             >
               {renderNavItems({ items: config.items, pathname: location.pathname })}
             </List>
-          ))}
+          ))
+          }
+          {(users.role === ("user")) &&
+          navConfig.map((config) => (
+            <List
+              key={config.subheader}
+              subheader={(
+                <ListSubheader
+                  disableGutters
+                  disableSticky
+                >
+                  {config.subheader}
+                </ListSubheader>
+              )}
+            >
+              {renderNavItems({ items: config.items, pathname: location.pathname })}
+            </List>
+          ))
+          }
         </Box>
         <Divider />
       </PerfectScrollbar>

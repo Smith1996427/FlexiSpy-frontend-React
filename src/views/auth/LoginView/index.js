@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {
@@ -9,6 +9,8 @@ import {
   Card,
   CardContent,
   CardMedia,
+  CircularProgress,
+  Grid,
   Divider,
   Link,
   Typography,
@@ -20,6 +22,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import Page from 'src/components/Page';
 import Logo from 'src/components/Logo';
 import LoginForm from './LoginForm';
+import wait from 'src/utils/wait';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,8 +80,11 @@ const useStyles = makeStyles((theme) => ({
 function LoginView() {
   const classes = useStyles();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmitSuccess = () => {
+  const handleSubmitSuccess = async() => {
+    setLoading(true);
+    await wait(1500);
     history.push('/app');
   };
 
@@ -88,6 +94,17 @@ function LoginView() {
       title="Login"
     >
       <Container maxWidth="md">
+       {(loading) &&
+      <Box
+        display="flex"
+        justifyContent="center"
+        my={5}
+      >
+        <CircularProgress />
+      </Box>
+        }
+        {(!loading) &&
+        <>
         <Box
           mb={8}
           display="flex"
@@ -128,7 +145,7 @@ function LoginView() {
                 <div>
                   Use
                   {' '}
-                  <b>123456</b>
+                  <b>zhen zhen</b>
                   {' '}
                   and password
                   {' '}
@@ -142,6 +159,18 @@ function LoginView() {
             <Box my={2}>
               <Divider />
             </Box>
+            <Grid container justify='space-between'>
+            <Grid item>
+            <Link
+              component={RouterLink}
+              to="/forgot"
+              variant="body2"
+              color="textSecondary"
+            >
+              Forgot password?
+            </Link>
+            </Grid>
+            <Grid item>
             <Link
               component={RouterLink}
               to="/register"
@@ -150,6 +179,8 @@ function LoginView() {
             >
               Create new account
             </Link>
+            </Grid>
+            </Grid>
           </CardContent>
           <CardMedia
             className={classes.media}
@@ -158,6 +189,8 @@ function LoginView() {
           >
           </CardMedia>
         </Card>
+        </>
+       }
       </Container>
     </Page>
   );

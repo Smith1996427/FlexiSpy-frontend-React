@@ -35,11 +35,11 @@ function Security({ className, ...rest }) {
       }}
       validationSchema={Yup.object().shape({
         currentPassword: Yup.string()
-        .min(7, 'Must be at least 7 characters')
+        .min(5, 'Must be at least 5 characters')
         .max(255)
         .required('Required'),
         password: Yup.string()
-          .min(7, 'Must be at least 7 characters')
+          .min(5, 'Must be at least 5 characters')
           .max(255)
           .required('Required'),
         passwordConfirm: Yup.string()

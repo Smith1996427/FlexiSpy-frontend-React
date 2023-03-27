@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import jwt from 'jsonwebtoken';
 import mock from 'src/utils/mock';
+import moment from 'moment';
 
 const JWT_SECRET = 'devias-top-secret-key';
 const JWT_EXPIRES_IN = '2 days';
@@ -14,7 +15,7 @@ const db = {
     country: 'China',
     email: 'zheng@demo.com',
     username: 'admin',
-    phonenumber : '123456',
+    phonenumber : '+1 234 567 8987',
     password: 'admin',
     firstName: 'Zheng',
     isPublic: true,
@@ -27,7 +28,7 @@ const db = {
 mock.onPost('/api/account/login').reply((config) => {
   const { email, password } = JSON.parse(config.data);
 
-  if (email !== 123456 || password !== 'admin') {
+  if (email !== "zhen zhen" || password !== 'admin') {
     return [400, { message: 'Please check your email and password' }];
   }
 
@@ -88,4 +89,106 @@ mock.onGet('/api/account/subscription').reply(200, {
     hasAnalytics: true,
     hasEmailAlerts: true
   }
+});
+
+
+mock.onGet('/api/account/users/list').reply(200, {
+  customers: [
+    {
+      id: '5e887a62195cc5aef7e8ca5d',
+      name: 'Jone Smith',
+      phone: '+1 854 412 3698',
+      avatar: '/static/third_party/avatars/avatar_2.png',
+      role: 'agent',
+      number : 1,
+      updatedAt : moment()
+      .subtract(1, 'days')
+      .format("YYYY-MM-DD")
+    },
+    {
+      id: '5e887ac47eed253091be10cb',
+      name: 'Adam',
+      phone: '+1 759 684 3521',
+      avatar: '/static/third_party/avatars/avatar_5.png',
+      role: 'user',
+      number : 2,
+      updatedAt: moment()
+        .subtract(2, 'days')
+        .format("YYYY-MM-DD")
+    },
+    {
+      id: '5e887b209c28ac3dd97f6db5',
+      name: 'Dad',
+      phone: '+1 545 858 2365',
+      avatar: '/static/third_party/avatars/avatar_4.png',
+      role: 'user',
+      number : 1,
+      updatedAt: moment()
+        .subtract(3, 'days')
+        .format("YYYY-MM-DD")
+    }
+  ]
+});
+
+
+mock.onPost('/api/accounts/update').reply((request) => {
+  const { update } = JSON.parse(request.data);
+  if(update == "Me")
+  {
+     return [200, { users:     {
+      id: '5e86809283e28b96d2d38537',
+      avatar: '/static/from_db/avatar/me.png',
+      phonenumber : '+1 234 567 8987',
+      name : "zhen zhen",
+      role: 'agent',
+    }
+   }];
+  }
+ if(update == "Jone Smith")
+ {
+    return [200, { users:  {
+      id: '5e887a62195cc5aef7e8ca5d',
+      name: 'Jone Smith',
+      phone: '+1 854 412 3698',
+      avatar: '/static/third_party/avatars/avatar_2.png',
+      role: 'agent',
+      number : 1,
+      updatedAt : moment()
+      .subtract(1, 'days')
+      .format("YYYY-MM-DD")
+    }
+  }];
+ }
+ if(update == "Adam")
+ {
+    return [200, { users:     {
+      id: '5e887ac47eed253091be10cb',
+      name: 'Adam',
+      phone: '+1 759 684 3521',
+      avatar: '/static/third_party/avatars/avatar_5.png',
+      role: 'user',
+      number : 2,
+      updatedAt: moment()
+        .subtract(2, 'days')
+        .format("YYYY-MM-DD")
+    }
+  }];
+ }
+
+ if(update == "Dad")
+ {
+    return [200, { users: {
+      id: '5e887b209c28ac3dd97f6db5',
+      name: 'Dad',
+      phone: '+1 545 858 2365',
+      avatar: '/static/third_party/avatars/avatar_4.png',
+      role: 'user',
+      number : 1,
+      updatedAt: moment()
+        .subtract(3, 'days')
+        .format("YYYY-MM-DD")
+    }
+  }];
+ }
+
 });

@@ -12,6 +12,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import { login } from 'src/actions/accountActions';
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -20,15 +21,16 @@ const useStyles = makeStyles(() => ({
 function LoginForm({ className, onSubmitSuccess, ...rest }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <Formik
       initialValues={{
-        email: 123456,
+        email: "zhen zhen",
         password: 'admin'
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.number().required('Email is required'),
+        email: Yup.string().required('User Name is required'),
         password: Yup.string().max(255).required('Password is required')
       })}
       onSubmit={async (values, {
@@ -40,10 +42,14 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
           await dispatch(login(values.email, values.password));
           onSubmitSuccess();
         } catch (error) {
-          const message = (error.response && error.response.data.message) || 'Something went wrong';
-
-          setStatus({ success: false });
-          setErrors({ submit: message });
+          
+          if(error.response && error.response.data.message)
+          enqueueSnackbar("User name or password incorrect. Please check again!", {
+            variant: 'error',
+          }); 
+          else
+          setErrors({ submit: 'Something went wrong' });  
+          setStatus({ success: false });     
           setSubmitting(false);
         }
       }}
@@ -68,12 +74,12 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
             fullWidth
             autoFocus
             helperText={touched.email && errors.email}
-            label="Phone Number"
+            label="User Name"
             margin="normal"
             name="email"
             onBlur={handleBlur}
             onChange={handleChange}
-            type="number"
+            type="text"
             value={values.email}
             variant="outlined"
           />
