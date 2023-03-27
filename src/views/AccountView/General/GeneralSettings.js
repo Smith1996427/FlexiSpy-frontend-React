@@ -16,25 +16,29 @@ import {
   makeStyles
 } from '@material-ui/core';
 import { addUserPhoneNumbers } from 'src/actions/userPhoneNumbersActions';
-import wait from 'src/utils/wait';
-import PhoneInput from 'react-phone-number-input/input'
-import { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
+// import wait from 'src/utils/wait';
+import PhoneInput from 'react-phone-number-input'
+import { isValidPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
 import ReactInputVerificationCode from "react-input-verification-code";
+import 'react-phone-number-input/style.css';
 
 
 
 const useStyles = makeStyles(() => ({
   root: {},
-  phonInput : {
-    fontSize : "16px", 
-    width : '100%', 
-    marginTop:"16px", 
-    padding:"18px", 
-    borderRadius : "5px",
-    backgroundColor : "rgba(0,0,0,0)",
-    border :"solid 1px grey",
-    color : "currentColor"
-   }
+  phoneInputcontainer : {
+    fontSize :20,
+    "& .PhoneInputCountry" : {
+      margin :16
+    },
+    "& .PhoneInputInput" : {
+      fontSize : 24,
+      padding : 7,
+      border : "none",
+      borderBottom : "solid 1px grey",
+      outline : "none"
+    }
+  }
 }));
 
 function GeneralSettings({ user, phone, className, ...rest }) {
@@ -49,14 +53,22 @@ function GeneralSettings({ user, phone, className, ...rest }) {
   const [value,  setValue] = useState();
 
   const handlePhone = (e) => {
-    setValue(formatPhoneNumberIntl(e));
+    setValue(e);
   }
 
  const handleVerify = () => {
-  setVerify(true);
-  enqueueSnackbar("Please input verification code!", {
-    variant: 'success',
-  }); 
+  if(isValidPhoneNumber(value))
+  {
+    setVerify(true);
+    enqueueSnackbar("Please input verification code!", {
+      variant: 'success',
+    }); 
+  }
+  else{
+    enqueueSnackbar("Invalid phone number!", {
+      variant: 'error',
+    }); 
+  }
 }
 
 const handleback = () => {
@@ -73,7 +85,7 @@ const handleconfirm = (e) => {
   // enqueueSnackbar("You added a phone successfully!", {
   //   variant: 'success',
   // }); 
-console.log(value)
+
    if(e.length >= 6)
    {
       enqueueSnackbar("your verification success!", {
@@ -145,12 +157,12 @@ console.log(value)
                     variant="outlined"
                   /> */}
 
-            <PhoneInput
-            className={classes.phonInput}
-             placeholder="Enter phone number"
+             <PhoneInput
+             className={classes.phoneInputcontainer}
+             name = "phonInput"
              value={value}
              onChange={(e) => handlePhone(e)}
-             />
+            />
                 </Grid>
                 <Grid
                   item
@@ -250,12 +262,23 @@ console.log(value)
               //   </Button>
               //  </Grid>
               // </Grid>
+              <Box display="flex">
               <ReactInputVerificationCode
               length={6}
               autoFocus
               placeholder=""
               onChange={handleconfirm}
-            />
+              />
+              <Button
+              color="secondary"
+              variant="contained"
+              size='small'
+              onClick={() => setVerify(false)}
+              style={{marginLeft : "35px", height : "50px", marginTop : "16px"}}
+            >
+              Back
+             </Button>
+            </Box>
               } 
               {(loading)  &&
               <CircularProgress />

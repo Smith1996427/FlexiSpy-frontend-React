@@ -15,7 +15,7 @@ const db = {
     country: 'China',
     email: 'zheng@demo.com',
     username: 'admin',
-    phonenumber : '+1 234 567 8987',
+    phonenumber : '12345678987',
     password: 'admin',
     firstName: 'Zheng',
     isPublic: true,
@@ -97,7 +97,7 @@ mock.onGet('/api/account/users/list').reply(200, {
     {
       id: '5e887a62195cc5aef7e8ca5d',
       name: 'Jone Smith',
-      phone: '+1 854 412 3698',
+      phone: '18544123698',
       avatar: '/static/third_party/avatars/avatar_2.png',
       role: 'agent',
       number : 1,
@@ -108,7 +108,7 @@ mock.onGet('/api/account/users/list').reply(200, {
     {
       id: '5e887ac47eed253091be10cb',
       name: 'Adam',
-      phone: '+1 759 684 3521',
+      phone: '17596843521',
       avatar: '/static/third_party/avatars/avatar_5.png',
       role: 'user',
       number : 2,
@@ -119,7 +119,7 @@ mock.onGet('/api/account/users/list').reply(200, {
     {
       id: '5e887b209c28ac3dd97f6db5',
       name: 'Dad',
-      phone: '+1 545 858 2365',
+      phone: '15458582365',
       avatar: '/static/third_party/avatars/avatar_4.png',
       role: 'user',
       number : 1,

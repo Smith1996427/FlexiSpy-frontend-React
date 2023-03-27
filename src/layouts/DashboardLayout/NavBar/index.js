@@ -38,6 +38,9 @@ import NavItem from './NavItem';
 import {MdAddCall, MdWhatsapp, MdPhoneAndroid, MdAddBusiness} from 'react-icons/md';
 import {BsCameraVideo} from 'react-icons/bs';
 import { updateProfile } from 'src/actions/currentPhoneActions';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import {formatPhoneNumberIntl } from 'react-phone-number-input';
 
 const navConfig = [
   {
@@ -322,6 +325,19 @@ const useStyles = makeStyles(() => ({
     cursor: 'pointer',
     width: 48,
     height: 48
+  },
+  phoneInputcontainer : {
+    fontSize :20,
+    "& .PhoneInputCountry" : {
+      margin :16
+    },
+    "& .PhoneInputInput" : {
+      fontSize : 24,
+      padding : 7,
+      border : "none",
+      borderBottom : "solid 1px grey",
+      outline : "none"
+    }
   }
 }));
 
@@ -349,6 +365,8 @@ function NavBar({ openMobile, onMobileClose, }) {
     }
     // eslint-disable-next-line
   }, [location.pathname]);
+
+  console.log(formatPhoneNumberIntl(phoneNumbers[0]))
 
   const content = (
     <Box
@@ -407,7 +425,12 @@ function NavBar({ openMobile, onMobileClose, }) {
                   key={state}
                   value={state}
                 >
-                  {state}
+                    <PhoneInput
+                      className={classes.phoneInputcontainer}
+                      name = "phonInput"
+                      value={state}
+                    />  
+                    {/* {formatPhoneNumberIntl(state)} */}
                 </option>
               ))}
             </TextField>

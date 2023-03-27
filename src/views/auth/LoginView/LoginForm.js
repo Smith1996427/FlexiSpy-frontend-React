@@ -13,9 +13,31 @@ import {
 } from '@material-ui/core';
 import { login } from 'src/actions/accountActions';
 import { useSnackbar } from 'notistack';
+import {
+  User as UserIcon,
+  Unlock as UnLockIcon,
+} from 'react-feather';
+
+
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {},
+  textField : {
+    "& .MuiInput-underline": {
+      borderWidth: 0,
+      marginTop : 16,
+      padding: 0 // <-- added zero padding instruction
+    },
+    "& .MuiInput-input" : {
+      fontSize : "24px"
+    }
+  },
+  Icon : {
+    margin:16,
+    marginTop : 37,
+    marginLeft : 23,
+    marginRight : 32
+  },
 }));
 
 function LoginForm({ className, onSubmitSuccess, ...rest }) {
@@ -69,41 +91,45 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
           onSubmit={handleSubmit}
           {...rest}
         >
-          <TextField
-            error={Boolean(touched.email && errors.email)}
-            fullWidth
-            autoFocus
-            helperText={touched.email && errors.email}
-            label="User Name"
-            margin="normal"
-            name="email"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            type="text"
-            value={values.email}
-            variant="outlined"
-          />
-          <TextField
-            error={Boolean(touched.password && errors.password)}
-            fullWidth
-            helperText={touched.password && errors.password}
-            label="Password"
-            margin="normal"
-            name="password"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            type="password"
-            value={values.password}
-            variant="outlined"
-          />
-          <Box mt={2}>
+          <Box display="flex">
+              <UserIcon className={classes.Icon}/>
+                <TextField
+                  error={Boolean(touched.email && errors.email)}
+                  fullWidth
+                  autoFocus
+                  helperText={touched.email && errors.email}
+                  label="User Name"
+                  margin="normal"
+                  name="email"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="text"
+                  value={values.email}
+                />
+          </Box>
+          <Box display="flex">
+              <UnLockIcon className={classes.Icon}/>
+                <TextField
+                  error={Boolean(touched.password && errors.password)}
+                  fullWidth
+                  helperText={touched.password && errors.password}
+                  label="Password"
+                  margin="normal"
+                  name="password"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="password"
+                  value={values.password}
+                />
+          </Box>
+          <Box mt={2}  textAlign="center">
             <Button
               color="secondary"
               disabled={isSubmitting}
-              fullWidth
               size="large"
               type="submit"
               variant="contained"
+              style={{width :  "50%"}}
             >
               Log In
             </Button>

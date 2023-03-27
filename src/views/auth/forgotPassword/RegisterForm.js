@@ -16,21 +16,46 @@ import {
 } from '@material-ui/core';
 // import { register } from 'src/actions/accountActions';
 import { useSnackbar } from 'notistack';
-import PhoneInput from 'react-phone-number-input/input';
-import { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import {formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input';
+
+import {
+  User as UserIcon,
+  Unlock as UnLockIcon,
+} from 'react-feather';
 
 const useStyles = makeStyles(() => ({
   root: {},
-  phonInput : {
-    fontSize : "16px", 
-    width : '100%', 
-    marginTop:"16px", 
-    padding:"18px", 
-    borderRadius : "5px",
-    backgroundColor : "rgba(0,0,0,0)",
-    border :"solid 1px grey",
-    color : "currentColor"
-   }
+  textField : {
+    "& .MuiInput-underline": {
+      borderWidth: 0,
+      marginTop : 16,
+      padding: 0 // <-- added zero padding instruction
+    },
+    "& .MuiInput-input" : {
+      fontSize : "24px"
+    }
+  },
+  Icon : {
+    margin:16,
+    marginTop : 37,
+    marginLeft : 23,
+    marginRight : 32
+  },
+  phoneInputcontainer : {
+    fontSize :20,
+    "& .PhoneInputCountry" : {
+      margin :16
+    },
+    "& .PhoneInputInput" : {
+      fontSize : 24,
+      padding : 7,
+      border : "none",
+      borderBottom : "solid 1px grey",
+      outline : "none"
+    }
+  }
 }));
 
 function RegisterForm({ className, onSubmitSuccess, ...rest }) {
@@ -40,7 +65,7 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
   const [value,  setValue] = useState();
 
   const handlePhone = (e) => {
-    setValue(formatPhoneNumberIntl(e));
+    setValue(e);
   }
 
 
@@ -69,10 +94,30 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
         try {
           // await dispatch(register(values));
           if(values.firstName === "zhen zhen")
-           {enqueueSnackbar("We sent verification code to your phone", {
-            variant: 'success',
-          }); 
-          onSubmitSuccess();}
+           {
+            if(value === "")
+              enqueueSnackbar("Your phone number must be input", {
+                variant: 'error',
+              })
+            else{
+              if(isValidPhoneNumber(value))
+              {              
+             // await axios.get(`https://phonevalidation.abstractapi.com/v1/?api_key=0cbec6807e804fe6a45340510afba64e&phone=${value}`)
+             //     .then((response) => {
+                     
+             //     });         
+               enqueueSnackbar("We sent verification code to your phone", {
+                 variant: 'success',
+               })
+               onSubmitSuccess();
+             }
+             else
+             { enqueueSnackbar("This is invalid phone number", {
+               variant: 'error',
+             })
+           }
+            }
+            }
           else
           enqueueSnackbar("User name is incorrect!", {
             variant: 'error',
@@ -98,59 +143,67 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
           onSubmit={handleSubmit}
           {...rest}
         >
-          <TextField
-            error={Boolean(touched.firstName && errors.firstName)}
-            fullWidth
-            helperText={touched.firstName && errors.firstName}
-            label="User Name"
-            margin="normal"
-            name="firstName"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            type="firstName"
-            value={values.firstName}
-            variant="outlined"
-          />
+           <Box display="flex">
+              <UserIcon className={classes.Icon}/>
+              <TextField
+               className={classes.textField}
+                error={Boolean(touched.firstName && errors.firstName)}
+                fullWidth
+                helperText={touched.firstName && errors.firstName}
+                label="User Name"
+                margin="normal"
+                name="firstName"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                type="text"
+                value={values.firstName}
+              />
+          </Box>
            <PhoneInput
-            className={classes.phonInput}
-             placeholder="Enter phone number"
+            className={classes.phoneInputcontainer}
              value={value}
              onChange={(e) => handlePhone(e)}
              />
-          <TextField
-            error={Boolean(touched.password && errors.password)}
-            fullWidth
-            helperText={touched.password && errors.password}
-            label="New Password"
-            margin="normal"
-            name="password"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            type="password"
-            value={values.password}
-            variant="outlined"
-          />
-           <TextField
-            error={Boolean(touched.passwordConfirm && errors.passwordConfirm)}
-            fullWidth
-            helperText={touched.passwordConfirm && errors.passwordConfirm}
-            label="Password Confirmation"
-            name="passwordConfirm"
-            margin="normal"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            type="password"
-            value={values.passwordConfirm}
-            variant="outlined"
-          />
-          <Box mt={2}>
+          <Box display="flex">
+            <UnLockIcon className={classes.Icon}/>
+              <TextField
+               className={classes.textField}
+                error={Boolean(touched.password && errors.password)}
+                fullWidth
+                helperText={touched.password && errors.password}
+                label="New Password"
+                margin="normal"
+                name="password"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                type="password"
+                value={values.password}
+              />
+          </Box>
+          <Box display="flex">
+            <UnLockIcon className={classes.Icon}/>
+              <TextField
+               className={classes.textField}
+                error={Boolean(touched.passwordConfirm && errors.passwordConfirm)}
+                fullWidth
+                helperText={touched.passwordConfirm && errors.passwordConfirm}
+                label="Password Confirmation"
+                name="passwordConfirm"
+                margin="normal"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                type="password"
+                value={values.passwordConfirm}
+              />
+           </Box>
+          <Box mt={2}  textAlign="center">
             <Button
               color="secondary"
               disabled={isSubmitting}
-              fullWidth
               size="large"
               type="submit"
               variant="contained"
+              style={{width :  "25%"}}
             >
               Ok
             </Button>

@@ -9,7 +9,7 @@ const initialState = {
     {
       id: '5e86809283e28b96d2d38537',
       avatar: '/static/from_db/avatar/me.png',
-      phonenumber : '+1 234 567 8987',
+      phonenumber : '+12345678987',
       name : "zhen zhen",
       role: 'agent',
     }
