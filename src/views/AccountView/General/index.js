@@ -25,8 +25,8 @@ function General({ className, ...rest }) {
     >
       <Grid
         item
-        lg={4}
-        md={6}
+        lg={3}
+        md={4}
         xl={3}
         xs={12}
       >
@@ -35,7 +35,7 @@ function General({ className, ...rest }) {
       <Grid
         item
         lg={8}
-        md={6}
+        md={8}
         xl={9}
         xs={12}
       >

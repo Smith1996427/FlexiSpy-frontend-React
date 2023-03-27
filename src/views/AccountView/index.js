@@ -50,7 +50,7 @@ function AccountView() {
       title="Settings"
     >
       <Container maxWidth="lg">
-        <Header />
+        {/* <Header /> */}
         <Box mt={3}>
           <Tabs
             onChange={handleTabsChange}

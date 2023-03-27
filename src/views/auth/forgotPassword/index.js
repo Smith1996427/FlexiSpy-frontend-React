@@ -41,23 +41,16 @@ function RegisterView() {
 
 
   const handleconfirm = (e) => {    
-    //  var receive = e;
-     
     if(e.length >= 6)
     {
        enqueueSnackbar("your verification code invalid!", {
          variant: 'error',
         }); 
     }
-  //  enqueueSnackbar("your code has been verified. Please login again!", {
-  //    variant: 'success',
-  //  }); 
-  //   history.push('/app/login');
   };
 
 
   const handleSubmitSuccess = () => {
-    console.log("fd")
      setVerify(true)
     enqueueSnackbar("Please input verification code!", {
       variant: 'success',
@@ -68,12 +61,6 @@ function RegisterView() {
   const handleback = () => {
     setVerify(false);
  };
-//  const handleconfirm = () => {
-//  enqueueSnackbar("your code has been verified. Please login again!", {
-//    variant: 'success',
-//  }); 
-//   history.push('/app/login');
-// };
 
   return (
     <Page
@@ -114,82 +101,6 @@ function RegisterView() {
               <RegisterForm onSubmitSuccess={handleSubmitSuccess} />
                }
                {(verify) &&
-                // <Grid container justify='space-between' spacing={1}>
-                //  <Grid item md={2} xs = {2}>
-                //  <TextField
-                //     fullWidth
-                //     name="code"
-                //     margin="normal"
-                //     type="number"
-                //     variant="outlined"
-                //   />               
-                //  </Grid>
-                //  <Grid item md={2} xs = {2}>
-                //  <TextField
-                //     fullWidth
-                //     name="code"
-                //     margin="normal"
-                //     type="number"
-                //     variant="outlined"
-                //   />               
-                //  </Grid>
-                //  <Grid item md={2} xs = {2}>
-                //  <TextField
-                //     fullWidth
-                //     name="code"
-                //     margin="normal"
-                //     type="number"
-                //     variant="outlined"
-                //   />               
-                //  </Grid>
-                //  <Grid item md={2} xs = {2}>
-                //  <TextField
-                //     fullWidth
-                //     name="code"
-                //     margin="normal"
-                //     type="number"
-                //     variant="outlined"
-                //   />               
-                //  </Grid>
-                //  <Grid item md={2} xs = {2}>
-                //  <TextField
-                //     fullWidth
-                //     name="code"
-                //     margin="normal"
-                //     type="number"
-                //     variant="outlined"
-                //   />               
-                //  </Grid>
-                //  <Grid item md={2} xs = {2}>
-                //  <TextField
-                //     fullWidth
-                //     name="code"
-                //     margin="normal"
-                //     type="number"
-                //     variant="outlined"
-                //   />               
-                //  </Grid>
-                //  <Grid item>
-                //   <Button
-                //     color="secondary"
-                //     size="small"
-                //     variant="contained"
-                //     onClick={() => handleback()}
-                //   >
-                //     Back
-                //   </Button>
-                //  </Grid>
-                //  <Grid item>
-                //   <Button
-                //     color="secondary"
-                //     size="small"
-                //     variant="contained"
-                //     onClick={() => handleconfirm()}
-                //   >
-                //     Confirm
-                //   </Button>
-                //  </Grid>
-                // </Grid>
                 <ReactInputVerificationCode
                 length={6}
                 autoFocus
@@ -201,14 +112,28 @@ function RegisterView() {
             <Box my={2}>
               <Divider />
             </Box>
-            <Link
-              component={RouterLink}
-              to="/login"
-              variant="body2"
-              color="textSecondary"
-            >
-              Back
-            </Link>
+            <Grid container justify='space-between'>
+              <Grid item>
+                <Link
+                component={RouterLink}
+                to="/home"
+                variant="body2"
+                color="textSecondary"
+                >
+                  Back to home
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link
+                component={RouterLink}
+                to="/login"
+                variant="body2"
+                color="textSecondary"
+                >
+                  Back
+                </Link>
+              </Grid>
+            </Grid>
           </CardContent>
         </Card>
       </Container>

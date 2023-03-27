@@ -425,12 +425,14 @@ function NavBar({ openMobile, onMobileClose, }) {
                   key={state}
                   value={state}
                 >
-                    <PhoneInput
+                    {/* <PhoneInput
                       className={classes.phoneInputcontainer}
                       name = "phonInput"
                       value={state}
-                    />  
-                    {/* {formatPhoneNumberIntl(state)} */}
+                      onChange = {setCurrentPhone}
+                      disabled
+                    />   */}
+                    {formatPhoneNumberIntl(state)}
                 </option>
               ))}
             </TextField>

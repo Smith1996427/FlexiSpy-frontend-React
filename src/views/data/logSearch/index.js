@@ -27,7 +27,7 @@ function FormikView() {
       title="Formik Form"
     >
       <Container  maxWidth={false}>
-      <Header />
+      {/* <Header /> */}
         <Box mt={16}>
           <Grid container style={{justifyContent : "center"}}>
             <Grid

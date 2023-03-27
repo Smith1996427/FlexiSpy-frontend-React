@@ -71,6 +71,15 @@ function Results({ className, ...rest }) {
                   Phone Number
                 </TableCell>
                 <TableCell>
+                  Device
+                </TableCell>
+                <TableCell>
+                  OS
+                </TableCell>
+                <TableCell>
+                  Status
+                </TableCell>
+                <TableCell>
                   Resistered Date
                 </TableCell>
                 <TableCell align="right">
@@ -83,7 +92,7 @@ function Results({ className, ...rest }) {
                 return (
                   <TableRow
                     hover
-                    key={customer.id}
+                    key={customer}
                   >
                    <TableCell>
                       {customer}

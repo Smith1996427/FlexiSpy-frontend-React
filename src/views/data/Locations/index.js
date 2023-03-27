@@ -53,7 +53,7 @@ function CustomerListView() {
       title="Location"
     >
       <Container maxWidth={false}>
-        <Header />
+        {/* <Header /> */}
         {logs && (
           <>
           <Box mt={3}>

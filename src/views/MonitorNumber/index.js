@@ -49,7 +49,7 @@ function CustomerListView() {
       title="Device Number"
     >
       <Container maxWidth={false}>
-        <Header />
+        {/* <Header /> */}
           <Box mt={3}>
             <Results number={number} />
           </Box>

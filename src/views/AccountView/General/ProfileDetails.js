@@ -50,43 +50,14 @@ function ProfileDetails({ user,phone, phoneNumbers, className, ...rest }) {
           >
             {`${user.firstName} ${user.lastName}`}
           </Typography>
-          <Typography
+          {/* <Typography
             color="textPrimary"
             variant="body1"
           >
-            Selected Phone : {phone}
-          </Typography>
-          <Box mt={3}>
-          <Typography
-            color="textPrimary"
-            variant="body1"
-          >
-            My Phones :
-          </Typography>
-          {
-          phoneNumbers.map((phoneNumber) => {
-                return (
-                <Typography
-                key={phoneNumber}
-                  color="textPrimary"
-                  variant="body1"
-                >
-                   {phoneNumber}
-                </Typography>
-                )
-              })
-          }
-        </Box>
+           {phone}
+          </Typography> */}
         </Box>
       </CardContent>
-      <CardActions>
-        <Button
-          fullWidth
-          variant="text"
-        >
-          upload new avatar
-        </Button>
-      </CardActions>
     </Card>
   );
 }

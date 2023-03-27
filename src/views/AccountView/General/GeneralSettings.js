@@ -16,7 +16,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import { addUserPhoneNumbers } from 'src/actions/userPhoneNumbersActions';
-// import wait from 'src/utils/wait';
+ import wait from 'src/utils/wait';
 import PhoneInput from 'react-phone-number-input'
 import { isValidPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
 import ReactInputVerificationCode from "react-input-verification-code";
@@ -24,7 +24,7 @@ import 'react-phone-number-input/style.css';
 
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   phoneInputcontainer : {
     fontSize :20,
@@ -36,8 +36,13 @@ const useStyles = makeStyles(() => ({
       padding : 7,
       border : "none",
       borderBottom : "solid 1px grey",
-      outline : "none"
+      outline : "none",
+      backgroundColor : "rgba(0,0,0,0)",
+      color : theme.palette.text.secondary
     }
+  },
+  textFiledColor : {
+    color : theme.palette.text.primary
   }
 }));
 
@@ -76,26 +81,16 @@ const handleback = () => {
 };
 
 const handleconfirm = (e) => {
-  // setLoading(true);
-  // await wait(2000);
-  // setLoading(false);
-
-
-  // setVerify(false);
-  // enqueueSnackbar("You added a phone successfully!", {
-  //   variant: 'success',
-  // }); 
 
    if(e.length >= 6)
    {
       enqueueSnackbar("your verification success!", {
-        variant: 'success',
+        variant: 'success'
        }); 
        dispatch(addUserPhoneNumbers(value));
        setVerify(false);
    }
-     
-    // 
+
  };
 
   return (
@@ -119,12 +114,12 @@ const handleconfirm = (e) => {
                 >
                   <TextField
                     fullWidth
+                    className={classes.textFiledColor}
                     label="User Name"
                     name="username"
                     disabled
                     type="text"
                     value="zhen zhen"
-                    variant="outlined"
                   />
                 </Grid>
                 <Grid
@@ -134,12 +129,12 @@ const handleconfirm = (e) => {
                 >
                   <TextField
                     fullWidth
+                    className={classes.textFiledColor}
                     label="Current Phone Number"
                     name="currentPhone"
                      disabled
                     type="text"
                     value={phone}
-                    variant="outlined"
                   />
                 </Grid>
                 <Grid
@@ -147,15 +142,6 @@ const handleconfirm = (e) => {
                   md={6}
                   xs={12}
                 >
-                  {/* <TextField
-                    fullWidth
-                    label="Add new phone number"
-                    name="newNumber"
-                    type="number"
-                    onChange={handleAddPhone}
-                    value={addPhone}
-                    variant="outlined"
-                  /> */}
 
              <PhoneInput
              className={classes.phoneInputcontainer}
@@ -186,82 +172,6 @@ const handleconfirm = (e) => {
               </Grid>
               }
               {(verify)  && 
-              //  <Grid container justify='space-between' spacing={1}>
-              //  <Grid item md={2} xs = {2}>
-              //  <TextField
-              //     fullWidth
-              //     name="code"
-              //     margin="normal"
-              //     type="number"
-              //     variant="outlined"
-              //   />               
-              //  </Grid>
-              //  <Grid item md={2} xs = {2}>
-              //  <TextField
-              //     fullWidth
-              //     name="code"
-              //     margin="normal"
-              //     type="number"
-              //     variant="outlined"
-              //   />               
-              //  </Grid>
-              //  <Grid item md={2} xs = {2}>
-              //  <TextField
-              //     fullWidth
-              //     name="code"
-              //     margin="normal"
-              //     type="number"
-              //     variant="outlined"
-              //   />               
-              //  </Grid>
-              //  <Grid item md={2} xs = {2}>
-              //  <TextField
-              //     fullWidth
-              //     name="code"
-              //     margin="normal"
-              //     type="number"
-              //     variant="outlined"
-              //   />               
-              //  </Grid>
-              //  <Grid item md={2} xs = {2}>
-              //  <TextField
-              //     fullWidth
-              //     name="code"
-              //     margin="normal"
-              //     type="number"
-              //     variant="outlined"
-              //   />               
-              //  </Grid>
-              //  <Grid item md={2} xs = {2}>
-              //  <TextField
-              //     fullWidth
-              //     name="code"
-              //     margin="normal"
-              //     type="number"
-              //     variant="outlined"
-              //   />               
-              //  </Grid>
-              //  <Grid item>
-              //   <Button
-              //     color="secondary"
-              //     size="small"
-              //     variant="contained"
-              //     onClick={() => handleback()}
-              //   >
-              //     Back
-              //   </Button>
-              //  </Grid>
-              //  <Grid item>
-              //   <Button
-              //     color="secondary"
-              //     size="small"
-              //     variant="contained"
-              //     onClick={() => handleconfirm()}
-              //   >
-              //     Confirm
-              //   </Button>
-              //  </Grid>
-              // </Grid>
               <Box display="flex">
               <ReactInputVerificationCode
               length={6}
