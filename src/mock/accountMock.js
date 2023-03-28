@@ -133,7 +133,7 @@ mock.onGet('/api/account/users/list').reply(200, {
 
 mock.onPost('/api/accounts/update').reply((request) => {
   const { update } = JSON.parse(request.data);
-  if(update == "Me")
+  if(update === "Me")
   {
      return [200, { users:     {
       id: '5e86809283e28b96d2d38537',
@@ -144,7 +144,7 @@ mock.onPost('/api/accounts/update').reply((request) => {
     }
    }];
   }
- if(update == "Jone Smith")
+ if(update === "Jone Smith")
  {
     return [200, { users:  {
       id: '5e887a62195cc5aef7e8ca5d',
@@ -159,7 +159,7 @@ mock.onPost('/api/accounts/update').reply((request) => {
     }
   }];
  }
- if(update == "Adam")
+ if(update === "Adam")
  {
     return [200, { users:     {
       id: '5e887ac47eed253091be10cb',
@@ -175,7 +175,7 @@ mock.onPost('/api/accounts/update').reply((request) => {
   }];
  }
 
- if(update == "Dad")
+ if(update === "Dad")
  {
     return [200, { users: {
       id: '5e887b209c28ac3dd97f6db5',

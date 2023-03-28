@@ -3,7 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   Container,
@@ -11,7 +10,6 @@ import {
   Divider,
   Link,
   Typography,
-  TextField,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
@@ -49,23 +47,14 @@ function RegisterView() {
     // history.push('/app/login');
   };
 
-  const handleback = () => {
-    setVerify(false);
- };
  const handleconfirm = (e) => {    
-  //  var receive = e;
    
   if(e.length >= 6)
-  // {
-  //    enqueueSnackbar("your verification code invalid!", {
-  //      variant: 'error',
-  //     }); 
-  // }
-{ enqueueSnackbar("your code has been verified. Please login again!", {
-   variant: 'success',
- }); 
-  history.push('/app/login');}
-};
+    { enqueueSnackbar("your code has been verified. Please login again!", {
+      variant: 'success',
+    }); 
+      history.push('/app/login');}
+    };
 
   return (
     <Page

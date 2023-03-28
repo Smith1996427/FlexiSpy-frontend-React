@@ -13,7 +13,6 @@ function General({ className, ...rest }) {
   const classes = useStyles();
   const { user } = useSelector((state) => state.account);
   const { phone } = useSelector((state) => state.currentPhone);
-  const { phoneNumbers } = useSelector((state) => state.userPhones);
 
   return (
     <Grid

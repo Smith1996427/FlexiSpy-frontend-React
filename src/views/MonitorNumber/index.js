@@ -11,7 +11,7 @@ import {
 import axios from 'src/utils/axios';
 import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import Header from './Header';
+// import Header from './Header';
 import Results from './Results';
 
 const useStyles = makeStyles((theme) => ({

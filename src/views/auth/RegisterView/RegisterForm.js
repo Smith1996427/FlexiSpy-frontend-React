@@ -7,20 +7,15 @@ import { Formik } from 'formik';
 import {
   Box,
   Button,
-  // Checkbox,
-  Grid,
-  FormHelperText,
   TextField,
-  // Typography,
-  // Link,
   makeStyles
 } from '@material-ui/core';
 // import { register } from 'src/actions/accountActions';
 import { useSnackbar } from 'notistack';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import {formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input';
-import axios from 'src/utils/axios';
+import { isValidPhoneNumber } from 'react-phone-number-input';
+// import axios from 'src/utils/axios';
 
 
 import {

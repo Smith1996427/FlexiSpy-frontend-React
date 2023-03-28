@@ -9,18 +9,16 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
-  CircularProgress,
+  // CircularProgress,
   Divider,
   Grid,
-  TextField,
   Typography,
   makeStyles
 } from '@material-ui/core';
 import { addUserPhoneNumbers } from 'src/actions/userPhoneNumbersActions';
- import wait from 'src/utils/wait';
+//  import wait from 'src/utils/wait';
 import PhoneInput from 'react-phone-number-input'
-import { isValidPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
+import { isValidPhoneNumber} from 'react-phone-number-input'
 import ReactInputVerificationCode from "react-input-verification-code";
 import 'react-phone-number-input/style.css';
 import Security from '../Security';
@@ -61,7 +59,7 @@ function GeneralSettings({ user, phone, className, ...rest }) {
   const { enqueueSnackbar } = useSnackbar();
   const [verify, setVerify] = useState(false);
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const [value,  setValue] = useState();
 
@@ -126,7 +124,7 @@ const handleconfirm = (e) => {
                 {`${user.firstName} ${user.lastName}`}
               </Typography>
             </Box>
-              {(!verify) && (!loading) &&
+              {(!verify) && 
               <>
               <Grid
                 container
@@ -218,9 +216,9 @@ const handleconfirm = (e) => {
              </Button>
             </Box>
               } 
-              {(loading)  &&
+              {/* {(loading)  &&
               <CircularProgress />
-              }
+              } */}
             </CardContent>
             <Divider />
           </Card>

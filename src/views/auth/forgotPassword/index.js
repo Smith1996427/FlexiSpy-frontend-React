@@ -1,17 +1,14 @@
 import React, {useState} from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   Container,
   Grid,
   Divider,
   Link,
-  Typography,
-  TextField,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
@@ -35,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 function RegisterView() {
   const classes = useStyles();
-  const history = useHistory();
+  // const history = useHistory();
   const [verify, setVerify] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -57,11 +54,6 @@ function RegisterView() {
     }); 
     // history.push('/app/login');
   };
-
-  const handleback = () => {
-    setVerify(false);
- };
-
   return (
     <Page
       className={classes.root}

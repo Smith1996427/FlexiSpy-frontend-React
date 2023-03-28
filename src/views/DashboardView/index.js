@@ -5,9 +5,9 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Header from './Header';
+// import Header from './Header';
 import DeviceInfo from './DeviceInfo';
-import ProductInfo from './ProductInfo';
+// import ProductInfo from './ProductInfo';
 import Account from './Account';
 import LastCall from './LastCall';
 import LastLocation from './LatestLocation';

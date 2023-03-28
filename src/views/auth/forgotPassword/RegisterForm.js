@@ -18,7 +18,7 @@ import {
 import { useSnackbar } from 'notistack';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import {formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 
 import {
   User as UserIcon,

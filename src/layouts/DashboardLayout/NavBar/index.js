@@ -39,7 +39,7 @@ import {MdAddCall, MdWhatsapp, MdPhoneAndroid, MdAddBusiness} from 'react-icons/
 import {BsCameraVideo} from 'react-icons/bs';
 import { updateProfile } from 'src/actions/currentPhoneActions';
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
+// import PhoneInput from 'react-phone-number-input';
 import {formatPhoneNumberIntl } from 'react-phone-number-input';
 
 const navConfig = [
@@ -345,7 +345,7 @@ const useStyles = makeStyles(() => ({
 function NavBar({ openMobile, onMobileClose, }) {
   const classes = useStyles();
   const location = useLocation();
-  const { user } = useSelector((state) => state.account);
+  // const { user } = useSelector((state) => state.account);
   const { users } = useSelector((state) => state.accounts);
 
   const dispatch = useDispatch();
@@ -366,7 +366,7 @@ function NavBar({ openMobile, onMobileClose, }) {
     // eslint-disable-next-line
   }, [location.pathname]);
 
-  console.log(formatPhoneNumberIntl(phoneNumbers[0]))
+  // console.log(formatPhoneNumberIntl(phoneNumbers[0]))
 
   const content = (
     <Box

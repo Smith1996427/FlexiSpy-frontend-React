@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Container,
-  Divider,
-  Tab,
-  Tabs,
+  // Divider,
+  // Tab,
+  // Tabs,
   Grid,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Header from './Header';
+// import Header from './Header';
 import General from './General';
-import Security from './Security';
+// import Security from './Security';
 // import Order from './Order';
-import Contact from './Contact';
 // import Licence from './Licence';
 // import Billing from './Billing';
 import PhoneManage from './PhoneManage';
@@ -31,21 +30,6 @@ const useStyles = makeStyles((theme) => ({
 
 function AccountView() {
   const classes = useStyles();
-  const [currentTab, setCurrentTab] = useState('general');
-  const tabs = [
-    { value: 'general', label: 'General' },
-    {value : 'phones', label : "My Phones"},
-    { value: 'security', label: 'Security' },
-    // { value: 'order', label: 'Order Profile' },
-    { value: 'contact', label: 'Contact support' }
-    // { value: 'licence', label: 'By a new licence' },
-    // { value: 'billing', label: 'Billing Note' }
-  
-  ];
-
-  const handleTabsChange = (event, value) => {
-    setCurrentTab(value);
-  };
 
   return (
     <Page

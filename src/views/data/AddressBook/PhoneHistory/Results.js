@@ -8,15 +8,12 @@ import {
   Button,
   Card,
   Checkbox,
-  Tab,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TablePagination,
   TableRow,
-  Tabs,
-  TextField,
   makeStyles
 } from '@material-ui/core';
 import {
@@ -25,19 +22,9 @@ import {
   PhoneMissed as PhoneMissedIcon
 } from 'react-feather';
 import Label from 'src/components/Label';
+import {BiDownArrow, BiUpArrow} from 'react-icons/bi'
 
 const filterOptions = ["all", "incoming", "outcoming", 'missed'];
-
-const sortOptions = [
-  {
-    value: 'updatedAt|desc',
-    label: 'Last update (newest first)'
-  },
-  {
-    value: 'updatedAt|asc',
-    label: 'Last update (oldest first)'
-  }
-];
 
 function applyFilters(customers, filters) {
   return customers.filter((customer) => {
@@ -121,39 +108,45 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
 function Results({ className, customers, ...rest }) {
   const classes = useStyles();
-  const [currentTab, setCurrentTab] = useState('all');
+  const [currentTab, setCurrentTab] = useState(0);
   const [selectedCustomers, setSelectedCustomers] = useState([]);
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
-  const [sort, setSort] = useState(sortOptions[0].value);
+  const [sort, setSort] = useState('updatedAt|desc');
   const [filters, setFilters] = useState({
     incoming: null,
     outcoming: null,
     missed: null
   });
 
-  const handleTabsChange = (event, value) => {
+
+
+
+  const handleTabsChange = (value) => {
     const updatedFilters = {
       ...filters,
       incoming: null,
-      outcoming: null,
-      missed: null
+      outcoming : null,
+      missed : null
     };
 
-    if (value !== 'all') {
-      updatedFilters[value] = true;
+    if(value > 3)
+    {
+      setCurrentTab(0);
     }
-
+    else{
+      updatedFilters[filterOptions[value]] = true;
+      setCurrentTab(value);
+    }
     setFilters(updatedFilters);
-    setSelectedCustomers([]);
-    setCurrentTab(value);
   };
 
-  const handleSortChange = (event) => {
-    event.persist();
-    setSort(event.target.value);
+  const handleSortChange = (value) => {
+    setSort(value);
   };
 
   const handleSelectAllCustomers = (event) => {
@@ -177,7 +170,6 @@ function Results({ className, customers, ...rest }) {
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
   };
-
   // Usually query is done on backend with indexing solutions
   const filteredCustomers = applyFilters(customers, filters);
   const sortedCustomers = applySort(filteredCustomers, sort);
@@ -190,28 +182,7 @@ function Results({ className, customers, ...rest }) {
     <Card
       className={clsx(classes.root, className)}
       {...rest}
-    > <Box display="flex" padding={2}>
-      <Box flexGrow={1} />
-      <TextField
-          label="Sort By"
-          name="sort"
-          onChange={handleSortChange}
-          select
-          SelectProps={{ native: true }}
-          value={sort}
-          variant="outlined"
-        >
-          {sortOptions.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </TextField>
-        </Box>
-      {/* <Divider /> */}
+    > 
       {enableBulkOperations && (
         <div className={classes.bulkOperations}>
           <div className={classes.bulkActions}>
@@ -241,14 +212,52 @@ function Results({ className, customers, ...rest }) {
                     onChange={handleSelectAllCustomers}
                   />
                 </TableCell>
-                <TableCell>
-                  Status
+                <TableCell onClick={() => handleTabsChange(currentTab + 1)}>
+                  <Box display='flex'>
+                    <Box style={{marginRight : "5px"}}>
+                      Status
+                    </Box>
+                  {(currentTab === 0) &&
+                   <Label color='success'> all </Label> 
+                  }
+                   {(currentTab === 2) &&
+                    <Label color="error">
+                      <ArrowUpRightIcon />
+                    </Label>
+                  }
+                   {(currentTab === 1) &&
+                    <Label color="success">                   
+                       <ArrowDownLeftIcon />
+                    </Label>
+                  }
+                   {(currentTab === 3) &&
+                    <Label>                   
+                       <PhoneMissedIcon />
+                    </Label>
+                  }
+                  </Box>
                 </TableCell>
                 <TableCell>
-                  duration
+                <Box display='flex'>
+                  <Box>
+                     Duration
+                  </Box>
+                  <Box style={{lineHeight : 0, marginLeft :"5px",fontSize :"11px"}}>
+                      <BiUpArrow onClick={() => handleSortChange("duration|desc")}/><br />
+                      <BiDownArrow onClick={() =>handleSortChange("duration|asc")}/>
+                  </Box>
+                  </Box>
                 </TableCell>
                 <TableCell  align="right">
-                  Date & Time
+                <Box display='flex' justifyContent='right'>
+                  <Box>
+                     Date & time
+                  </Box>
+                  <Box style={{lineHeight : 0, marginLeft :"5px",fontSize :"11px"}}>
+                      <BiUpArrow onClick={() => handleSortChange("updatedAt|desc")}/><br />
+                      <BiDownArrow onClick={() =>handleSortChange("updatedAt|asc")}/>
+                  </Box>
+                  </Box>
                 </TableCell>
               </TableRow>
             </TableHead>

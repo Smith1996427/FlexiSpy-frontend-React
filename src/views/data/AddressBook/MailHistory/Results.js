@@ -13,15 +13,12 @@ import {
   Divider,
   Fade,
   Modal,
-  Tab,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TablePagination,
   TableRow,
-  Tabs,
-  TextField,
   Typography,
   makeStyles
 } from '@material-ui/core';
