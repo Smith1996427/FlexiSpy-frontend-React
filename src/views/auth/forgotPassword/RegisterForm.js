@@ -25,7 +25,7 @@ import {
   Unlock as UnLockIcon,
 } from 'react-feather';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   textField : {
     "& .MuiInput-underline": {
@@ -53,7 +53,9 @@ const useStyles = makeStyles(() => ({
       padding : 7,
       border : "none",
       borderBottom : "solid 1px grey",
-      outline : "none"
+      outline : "none",
+      backgroundColor : "rgba(0,0,0,0)",
+      color : theme.palette.text.primary
     }
   }
 }));

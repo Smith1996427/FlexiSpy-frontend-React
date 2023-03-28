@@ -3,15 +3,11 @@ import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
-  Breadcrumbs,
   Button,
   Grid,
-  Link,
   SvgIcon,
-  Typography,
   makeStyles
 } from '@material-ui/core';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import {
   Search as SearchIcon
 } from 'react-feather';
@@ -41,12 +37,23 @@ function Header({ className, ...rest }) {
       {...rest}
     >
       <Grid item>
-        <Typography
-          variant="h3"
-          color="textPrimary"
+      </Grid>
+      <Grid item>
+        <Button
+          color="secondary"
+          variant="contained"
+          className={classes.action}
+          component = {RouterLink}
+          to = "/app/data/call/log/search"
         >
-          My Users
-        </Typography>
+          <SvgIcon
+            fontSize="small"
+            className={classes.actionIcon}
+          >
+            <SearchIcon />
+          </SvgIcon>
+          Search
+        </Button>
       </Grid>
     </Grid>
   );

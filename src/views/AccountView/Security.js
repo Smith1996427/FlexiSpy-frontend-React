@@ -91,8 +91,8 @@ function Security({ className, ...rest }) {
               >
                 <Grid
                   item
-                  md={4}
-                  sm={4}
+                  md={12}
+                  sm={12}
                   xs={12}
                 >
                   <TextField
@@ -105,13 +105,12 @@ function Security({ className, ...rest }) {
                     onChange={handleChange}
                     type="password"
                     value={values.currentPassword}
-                    variant="outlined"
                   />
                 </Grid>
                 <Grid
                   item
-                  md={4}
-                  sm={4}
+                  md={12}
+                  sm={12}
                   xs={12}
                 >
                   <TextField
@@ -124,13 +123,12 @@ function Security({ className, ...rest }) {
                     onChange={handleChange}
                     type="password"
                     value={values.password}
-                    variant="outlined"
                   />
                 </Grid>
                 <Grid
                   item
-                  md={4}
-                  sm={4}
+                  md={12}
+                  sm={12}
                   xs={12}
                 >
                   <TextField
@@ -143,7 +141,6 @@ function Security({ className, ...rest }) {
                     onChange={handleChange}
                     type="password"
                     value={values.passwordConfirm}
-                    variant="outlined"
                   />
                 </Grid>
               </Grid>

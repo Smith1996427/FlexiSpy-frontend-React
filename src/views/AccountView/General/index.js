@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Grid, makeStyles } from '@material-ui/core';
-import ProfileDetails from './ProfileDetails';
 import GeneralSettings from './GeneralSettings';
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {minHeight : "500px", marginTop : "30"}
 }));
 
 function General({ className, ...rest }) {
@@ -23,24 +22,7 @@ function General({ className, ...rest }) {
       spacing={3}
       {...rest}
     >
-      <Grid
-        item
-        lg={3}
-        md={4}
-        xl={3}
-        xs={12}
-      >
-        <ProfileDetails phoneNumbers ={phoneNumbers} phone = {phone} user={user} />
-      </Grid>
-      <Grid
-        item
-        lg={8}
-        md={8}
-        xl={9}
-        xs={12}
-      >
         <GeneralSettings phone = {phone} user={user} />
-      </Grid>
     </Grid>
   );
 }

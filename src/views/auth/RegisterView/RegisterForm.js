@@ -30,7 +30,7 @@ import {
 
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
   },
   textField : {
@@ -59,7 +59,9 @@ const useStyles = makeStyles(() => ({
       padding : 7,
       border : "none",
       borderBottom : "solid 1px grey",
-      outline : "none"
+      outline : "none",
+      backgroundColor : "rgba(0,0,0,0)",
+      color : theme.palette.text.primary
     }
   }
 }));

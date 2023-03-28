@@ -73,29 +73,18 @@ function RegisterView() {
       title="Register"
     >
       <Container maxWidth="sm">
-        <Box
-          mb={5}
-          display="flex"
-          alignItems="center"
-        >
-          <RouterLink to="/">
-            <Logo />
-          </RouterLink>
-        </Box>
+
         <Card>
           <CardContent>
-            <Typography
-              gutterBottom
-              variant="h2"
-              color="textPrimary"
-            >
-              Sign up
-            </Typography>
-            {(!verify) &&
-            <Typography variant="subtitle1">
-              Please sign up on the flexiSPY
-            </Typography>
-            }
+          <Box
+            mt={3}
+            display="flex"
+            justifyContent='center'
+          >
+           <RouterLink to="/">
+             <Logo />
+           </RouterLink>
+         </Box>
              {(verify) &&
             <Typography variant="subtitle1">
               Please input verification code

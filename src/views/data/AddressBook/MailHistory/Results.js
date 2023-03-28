@@ -29,22 +29,10 @@ import {
   ArrowDownLeft as ArrowDownLeftIcon,
   ArrowUpRight as ArrowUpRightIcon
 } from 'react-feather';
+import {BiDownArrow, BiUpArrow} from 'react-icons/bi'
 import Label from 'src/components/Label';
 
-const tabs = [
-  {
-    value: 'all',
-    label: 'All'
-  },
-  {
-    value: 'received',
-    label: 'received'
-  },
-  {
-    value: 'sent',
-    label: 'sent'
-  }
-];
+const filterOptions = ["all", "sent", "received"];
 
 const sortOptions = [
   {
@@ -151,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Results({ className, customers, ...rest }) {
   const classes = useStyles();
-  const [currentTab, setCurrentTab] = useState('all');
+  const [currentTab, setCurrentTab] = useState(0);
   const [selectedCustomers, setSelectedCustomers] = useState([]);
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
@@ -163,25 +151,26 @@ function Results({ className, customers, ...rest }) {
     sent: null
   });
 
-  const handleTabsChange = (event, value) => {
+  const handleTabsChange = (value) => {
     const updatedFilters = {
       ...filters,
-      received: null,
-      sent: null
+      sent: null,
+      received: null
     };
 
-    if (value !== 'all') {
-      updatedFilters[value] = true;
+    if(value > 2)
+    {
+      setCurrentTab(0);
     }
-
+    else{
+      updatedFilters[filterOptions[value]] = true;
+      setCurrentTab(value);
+    }
     setFilters(updatedFilters);
-    setSelectedCustomers([]);
-    setCurrentTab(value);
   };
 
-  const handleSortChange = (event) => {
-    event.persist();
-    setSort(event.target.value);
+  const handleSortChange = (value) => {
+    setSort(value);
   };
 
   const handleSelectAllCustomers = (event) => {
@@ -224,42 +213,7 @@ function Results({ className, customers, ...rest }) {
     <Card
       className={clsx(classes.root, className)}
       {...rest}
-    > <Box display="flex" padding={2}>
-      <Tabs
-        onChange={handleTabsChange}
-        scrollButtons="auto"
-        textColor="secondary"
-        value={currentTab}
-        variant="scrollable"
-      >
-        {tabs.map((tab) => (
-          <Tab
-            key={tab.value}
-            value={tab.value}
-            label={tab.label}
-          />
-        ))}
-      </Tabs>
-      <Box flexGrow={1} />
-      <TextField
-          label="Sort By"
-          name="sort"
-          onChange={handleSortChange}
-          select
-          SelectProps={{ native: true }}
-          value={sort}
-          variant="outlined"
-        >
-          {sortOptions.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </TextField>
-        </Box>
+    > 
       <Divider />
       {enableBulkOperations && (
         <div className={classes.bulkOperations}>
@@ -290,17 +244,42 @@ function Results({ className, customers, ...rest }) {
                     onChange={handleSelectAllCustomers}
                   />
                 </TableCell>
-                <TableCell>
-                  Status
+                <TableCell onClick={() => handleTabsChange(currentTab + 1)}>
+                  <Box display='flex'>
+                    <Box style={{marginRight : "5px"}}>
+                      Status
+                    </Box>
+                  {(currentTab === 0) &&
+                   <Label color='success'> all </Label> 
+                  }
+                   {(currentTab === 1) &&
+                    <Label color="error">
+                      <ArrowUpRightIcon />
+                    </Label>
+                  }
+                   {(currentTab === 2) &&
+                    <Label color="success">                   
+                       <ArrowDownLeftIcon />
+                    </Label>
+                  }
+                  </Box>
                 </TableCell>
                 <TableCell>
                   Subject
                 </TableCell>
                 <TableCell>
-                  Content
+                 <Box display='flex'>
+                  <Box>
+                     Date
+                  </Box>
+                  <Box style={{lineHeight : 0, marginLeft :"5px",fontSize :"11px"}}>
+                      <BiUpArrow onClick={() => handleSortChange("updatedAt|desc")}/><br />
+                      <BiDownArrow onClick={() =>handleSortChange("updatedAt|asc")}/>
+                  </Box>
+                  </Box>
                 </TableCell>
                 <TableCell  align="right">
-                  Date
+                  Content
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -309,9 +288,8 @@ function Results({ className, customers, ...rest }) {
                 const isCustomerSelected = selectedCustomers.includes(customer.id);
 
                 return (
-                  <>
                   <TableRow
-                    hover
+                    hover     
                     key={customer.id}
                     selected={isCustomerSelected}
                     onClick = {() => openModal(customer)}
@@ -338,14 +316,13 @@ function Results({ className, customers, ...rest }) {
                     <TableCell>
                       {customer.subject}
                     </TableCell>
-                    <TableCell>
-                      {customer.description}
-                    </TableCell>
-                    <TableCell align="right">
+                    <TableCell >
                       {customer.updatedAt}
                     </TableCell>
+                    <TableCell align="right">
+                      {customer.description}
+                    </TableCell>
                   </TableRow>
-                 </>
                 );
               })}
             </TableBody>

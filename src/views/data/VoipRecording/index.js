@@ -53,7 +53,7 @@ function CustomerListView() {
       title="VoIP Call Recording"
     >
       <Container maxWidth={false}>
-        {/* <Header /> */}
+        <Header />
         {logs && (
           <Box mt={3}>
             <Results customers={logs} />

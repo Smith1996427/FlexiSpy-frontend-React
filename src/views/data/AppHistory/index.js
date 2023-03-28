@@ -52,7 +52,7 @@ function CustomerListView() {
       title="App History"
     >
       <Container maxWidth={false}>
-        {/* <Header /> */}
+        <Header />
         {logs && (
           <Box mt={3}>
             <Results customers={logs} />

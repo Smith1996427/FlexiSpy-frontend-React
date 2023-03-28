@@ -41,7 +41,7 @@ function Header({ className, ...rest }) {
       {...rest}
     >
       <Grid item>
-        <Breadcrumbs
+        {/* <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
         >
@@ -67,7 +67,7 @@ function Header({ className, ...rest }) {
           color="textPrimary"
         >
           Applications History
-        </Typography>
+        </Typography> */}
       </Grid>
       <Grid item>
         <Button

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
 import {
+  Avatar,
   Box,
   Button,
   Card,
@@ -13,6 +14,7 @@ import {
   Divider,
   Grid,
   TextField,
+  Typography,
   makeStyles
 } from '@material-ui/core';
 import { addUserPhoneNumbers } from 'src/actions/userPhoneNumbersActions';
@@ -21,11 +23,18 @@ import PhoneInput from 'react-phone-number-input'
 import { isValidPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
 import ReactInputVerificationCode from "react-input-verification-code";
 import 'react-phone-number-input/style.css';
-
+import Security from '../Security';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {},
+  name: {
+    marginTop: theme.spacing(1)
+  },
+  avatar: {
+    height: 100,
+    width: 100
+  },
   phoneInputcontainer : {
     fontSize :20,
     "& .PhoneInputCountry" : {
@@ -50,7 +59,6 @@ function GeneralSettings({ user, phone, className, ...rest }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-  const [addPhone, setAddPhone] = useState("");
   const [verify, setVerify] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -76,10 +84,6 @@ function GeneralSettings({ user, phone, className, ...rest }) {
   }
 }
 
-const handleback = () => {
-  setVerify(false);
-};
-
 const handleconfirm = (e) => {
 
    if(e.length >= 6)
@@ -99,28 +103,50 @@ const handleconfirm = (e) => {
             className={clsx(classes.root, className)}
             {...rest}
           >
-            <CardHeader title="Profile" />
-            <Divider />
+            {/* <CardHeader title="Profile" />
+            <Divider /> */}
             <CardContent>
+
+            <Box
+              display="flex"
+              alignItems="center"
+              flexDirection="column"
+              textAlign="center"
+            >
+              <Avatar
+                className={classes.avatar}
+                src={user.avatar}
+              />
+              <Typography
+                className={classes.name}
+                gutterBottom
+                variant="h3"
+                color="textPrimary"
+              >
+                {`${user.firstName} ${user.lastName}`}
+              </Typography>
+            </Box>
               {(!verify) && (!loading) &&
+              <>
               <Grid
                 container
-                spacing={4}
+                spacing={3}
               >
-                <Grid
+                {/* <Grid
                   item
-                  md={6}
+                  md={5}
                   xs={12}
-                >
-                  <TextField
+                > */}
+                  {/* <TextField
                     fullWidth
                     className={classes.textFiledColor}
-                    label="User Name"
                     name="username"
                     disabled
                     type="text"
-                    value="zhen zhen"
-                  />
+                    value="Current Phone Number"
+                    style={{border : "none", outline : "none"}}
+                  /> */}
+                  {/* <Typography style={{textAlign : "right"}}>Current</Typography>
                 </Grid>
                 <Grid
                   item
@@ -130,30 +156,30 @@ const handleconfirm = (e) => {
                   <TextField
                     fullWidth
                     className={classes.textFiledColor}
-                    label="Current Phone Number"
                     name="currentPhone"
                      disabled
                     type="text"
                     value={phone}
                   />
-                </Grid>
+                </Grid> */}
                 <Grid
                   item
-                  md={6}
-                  xs={12}
+                  md={9}
+                  xl = {9}
+                  xs={9}
                 >
-
-             <PhoneInput
-             className={classes.phoneInputcontainer}
-             name = "phonInput"
-             value={value}
-             onChange={(e) => handlePhone(e)}
-            />
+                    <PhoneInput
+                    className={classes.phoneInputcontainer}
+                    name = "phonInput"
+                    value={value}
+                    onChange={(e) => handlePhone(e)}
+                    />
                 </Grid>
                 <Grid
                   item
-                  md={6}
-                  xs={12}
+                  md={3}
+                  xl = {3}
+                  xs={3}
                 >
                   <Box
                     p={2}
@@ -165,11 +191,13 @@ const handleconfirm = (e) => {
                       variant="contained"
                       onClick={() => handleVerify()}
                     >
-                      Add Phone
+                      Add
                     </Button>
                   </Box>
-                </Grid>
+                </Grid>               
               </Grid>
+              <Security />
+              </>
               }
               {(verify)  && 
               <Box display="flex">

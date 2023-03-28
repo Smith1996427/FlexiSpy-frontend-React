@@ -52,7 +52,7 @@ function CustomerListView() {
       title="Address Book"
     >
       <Container maxWidth={false}>
-        {/* <Header /> */}
+        <Header />
         {logs && (
           <Box mt={3}>
             <AddressList customers={logs} />

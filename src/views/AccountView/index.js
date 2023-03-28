@@ -5,6 +5,7 @@ import {
   Divider,
   Tab,
   Tabs,
+  Grid,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
@@ -22,7 +23,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.dark,
     minHeight: '100%',
     paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3)
+    paddingBottom: theme.spacing(3),
+    width : "100%",
+    margin : "0px"
   }
 }));
 
@@ -49,9 +52,9 @@ function AccountView() {
       className={classes.root}
       title="Settings"
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false}>
         {/* <Header /> */}
-        <Box mt={3}>
+        {/* <Box mt={3}>
           <Tabs
             onChange={handleTabsChange}
             scrollButtons="auto"
@@ -68,14 +71,21 @@ function AccountView() {
               />
             ))}
           </Tabs>
-        </Box>
-        <Divider />
+        </Box> 
+        <Divider />*/}
         <Box mt={3}>
-          {currentTab === 'general' && <General />}
-          {currentTab === 'phones' && <PhoneManage />}
-          {currentTab === 'security' && <Security />}
+          <Grid container spacing={5} justify="space-between">
+            <Grid item lg={5} md={5} xl={5} xs={12}>
+              <General />
+            </Grid>
+            <Grid item lg={7} md={7} xl={7} xs={12}>
+              <PhoneManage />
+            </Grid>
+          </Grid>
+          {/* {currentTab === 'phones' && <PhoneManage />} */}
+          {/* {currentTab === 'security' && <Security />} */}
           {/* {currentTab === 'order' && <Order />} */}
-          {currentTab === 'contact' && <Contact />}
+          {/* {currentTab === 'contact' && <Contact />} */}
           {/* {currentTab === 'licence' && <Licence />}
           {currentTab === 'billing' && <Billing />} */}
          

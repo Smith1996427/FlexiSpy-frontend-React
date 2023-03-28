@@ -9,14 +9,21 @@ import {
   CardHeader,
   CircularProgress,
   Divider,
+  Link,
   FormHelperText,
   Grid,
   TextField,
-  Typography
+  Typography,
+  makeStyles
 } from '@material-ui/core';
 import wait from 'src/utils/wait';
 import { DateTimePicker } from '@material-ui/pickers';
 import moment from 'moment';
+import { Link as RouterLink } from 'react-router-dom';
+
+const useStyles = makeStyles((theme) => ({
+  root: {}
+}));
 
 const typeOptions = [
   {
@@ -118,7 +125,7 @@ const voipApplication = [
 ];
 
 function BasicForm() {
-
+  const classes = useStyles();
   return (
     <Formik
       initialValues={{
@@ -429,7 +436,17 @@ function BasicForm() {
 
 
                 </Grid>
-                <Box mt={2} style={{textAlign : "right"}} >
+                <Box mt={2} display="flex" >
+                <Button
+                    variant="contained"
+                    color='primary'
+                    className={classes.action}
+                    component = {RouterLink}
+                    to = "/app/data/call/log/list"
+                  >
+                    Back
+                  </Button>
+                  <Box flexGrow={1} />
                   <Button
                     color="secondary"
                     disabled={isSubmitting}

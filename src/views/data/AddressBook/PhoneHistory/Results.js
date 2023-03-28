@@ -26,24 +26,7 @@ import {
 } from 'react-feather';
 import Label from 'src/components/Label';
 
-const tabs = [
-  {
-    value: 'all',
-    label: 'All'
-  },
-  {
-    value: 'incoming',
-    label: 'Incoming'
-  },
-  {
-    value: 'outcoming',
-    label: 'Outcoming'
-  },
-  {
-    value: 'missed',
-    label: 'Missed'
-  }
-];
+const filterOptions = ["all", "incoming", "outcoming", 'missed'];
 
 const sortOptions = [
   {
@@ -208,21 +191,6 @@ function Results({ className, customers, ...rest }) {
       className={clsx(classes.root, className)}
       {...rest}
     > <Box display="flex" padding={2}>
-      <Tabs
-        onChange={handleTabsChange}
-        scrollButtons="auto"
-        textColor="secondary"
-        value={currentTab}
-        variant="scrollable"
-      >
-        {tabs.map((tab) => (
-          <Tab
-            key={tab.value}
-            value={tab.value}
-            label={tab.label}
-          />
-        ))}
-      </Tabs>
       <Box flexGrow={1} />
       <TextField
           label="Sort By"
@@ -262,7 +230,7 @@ function Results({ className, customers, ...rest }) {
         </div>
       )}
       <PerfectScrollbar>
-        <Box minWidth={700}>
+        <Box minWidth={400}>
           <Table>
             <TableHead>
               <TableRow>

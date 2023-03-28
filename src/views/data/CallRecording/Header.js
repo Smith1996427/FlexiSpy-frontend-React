@@ -45,7 +45,7 @@ function Header({ className, ...rest }) {
       {...rest}
     >
       <Grid item>
-        <Breadcrumbs
+        {/* <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
         >
@@ -71,7 +71,7 @@ function Header({ className, ...rest }) {
           color="textPrimary"
         >
           Call Recordings
-        </Typography>
+        </Typography> */}
       </Grid>
       <Grid item>
         <Box display="flex">

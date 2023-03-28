@@ -48,41 +48,6 @@ function Header({ className, contacter, ...rest }) {
       {...rest}
     >
       <Grid item>
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label="breadcrumb"
-        >
-          <Link
-            variant="body1"
-            color="inherit"
-            to="/app"
-            component={RouterLink}
-          >
-            Dashboard
-          </Link>
-          <Link
-            variant="body1"
-            color="inherit"
-            to="#"
-            component={RouterLink}
-          >
-            Data
-          </Link>
-          <Link
-            variant="body1"
-            color="inherit"
-            to="/app/data/addressbook"
-            component={RouterLink}
-          >
-            Address Book
-          </Link>
-        </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
-          Call Logs with {contacter.name}
-        </Typography>
       </Grid>
       <Grid item>
       <Box display="flex">

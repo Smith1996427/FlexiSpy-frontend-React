@@ -11,49 +11,29 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Avatar,
   Box,
-  Button,
   Card,
-  Checkbox,
   Divider,
   IconButton,
-  InputAdornment,
   Link,
   SvgIcon,
-  Tab,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TablePagination,
   TableRow,
-  Tabs,
-  TextField,
   Typography,
   makeStyles
 } from '@material-ui/core';
 import {
   Delete as DeleteIcon,
-  ArrowRight as ArrowRightIcon,
-  Search as SearchIcon
+  ArrowRight as ArrowRightIcon
 } from 'react-feather';
+import {BiDownArrow, BiUpArrow} from 'react-icons/bi'
 import getInitials from 'src/utils/getInitials';
 import axios from 'src/utils/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-
-const tabs = [
-  {
-    value: 'all',
-    label: 'All'
-  },
-  {
-    value: 'agent',
-    label: 'Agent'
-  },
-  {
-    value: 'user',
-    label: 'User'
-  }
-];
+import Label from 'src/components/Label';
 
 const sortOptions = [
   {
@@ -66,24 +46,11 @@ const sortOptions = [
   }
 ];
 
-function applyFilters(customers, query, filters) {
+const filterOptions = ["all", "agent", "user"];
+
+function applyFilters(customers, filters) {
   return customers.filter((customer) => {
     let matches = true;
-
-    if (query) {
-      const properties = ['phone', 'name'];
-      let containsQuery = false;
-
-      properties.forEach((property) => {
-        if (customer[property].toLowerCase().includes(query.toLowerCase())) {
-          containsQuery = true;
-        }
-      });
-
-      if (!containsQuery) {
-        matches = false;
-      }
-    }
 
     Object.keys(filters).forEach((key) => {
 
@@ -161,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
     height: 42,
     width: 42,
     marginRight: theme.spacing(1)
+  },
+  thead : {
+    padding:6
   }
 }));
 
@@ -169,13 +139,11 @@ function Results({ className, selectUsers,...rest }) {
 
   const isMountedRef = useIsMountedRef();
   const [customers, setCustomers] = useState(null);
-  
 
 
-  const [currentTab, setCurrentTab] = useState('all');
+  const [currentTab, setCurrentTab] = useState(0);
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
-  const [query, setQuery] = useState('');
   const [sort, setSort] = useState(sortOptions[0].value);
   const [filters, setFilters] = useState({
     agent: null,
@@ -201,41 +169,43 @@ function Results({ className, selectUsers,...rest }) {
     return null;
   }
 
-  const handleTabsChange = (event, value) => {
+  const handleTabsChange = (value) => {
     const updatedFilters = {
       ...filters,
       agent: null,
       user: null
     };
 
-    if (value !== 'all') {
-      updatedFilters[value] = true;
+    if(value > 2)
+    {
+      setCurrentTab(0);
     }
-
+    else{
+      updatedFilters[filterOptions[value]] = true;
+      setCurrentTab(value);
+    }
     setFilters(updatedFilters);
-    setCurrentTab(value);
   };
 
-  const handleQueryChange = (event) => {
-    event.persist();
-    setQuery(event.target.value);
-  };
-
-  const handleSortChange = (event) => {
-    event.persist();
-    setSort(event.target.value);
+  const handleSortChange = (sortValue) => {
+    // event.persist();
+    setSort(sortValue);
   };
 
   const handlePageChange = (event, newPage) => {
+    event.preventDefault();
+    event.persist();
     setPage(newPage);
   };
 
   const handleLimitChange = (event) => {
+    event.preventDefault();
+    event.persist();
     setLimit(event.target.value);
   };
 
   // Usually query is done on backend with indexing solutions
-  const filteredCustomers = applyFilters(customers, query, filters);
+  const filteredCustomers = applyFilters(customers, filters);
   const sortedCustomers = applySort(filteredCustomers, sort);
   const paginatedCustomers = applyPagination(sortedCustomers, page, limit);
 
@@ -244,67 +214,7 @@ function Results({ className, selectUsers,...rest }) {
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <Tabs
-        onChange={handleTabsChange}
-        scrollButtons="auto"
-        textColor="secondary"
-        value={currentTab}
-        variant="scrollable"
-      >
-        {tabs.map((tab) => (
-          <Tab
-            key={tab.value}
-            value={tab.value}
-            label={tab.label}
-          />
-        ))}
-      </Tabs>
       <Divider />
-      <Box
-        p={2}
-        minHeight={56}
-        display="flex"
-        alignItems="center"
-      >
-        <TextField
-          className={classes.queryField}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SvgIcon
-                  fontSize="small"
-                  color="action"
-                >
-                  <SearchIcon />
-                </SvgIcon>
-              </InputAdornment>
-            )
-          }}
-          onChange={handleQueryChange}
-          placeholder="Search customers"
-          value={query}
-          variant="outlined"
-        />
-        <Box flexGrow={1} />
-        <TextField
-          label="Sort By"
-          name="sort"
-          onChange={handleSortChange}
-          select
-          SelectProps={{ native: true }}
-          value={sort}
-          variant="outlined"
-        >
-          {sortOptions.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </TextField>
-      </Box>
       <PerfectScrollbar>
         <Box minWidth={700}>
           <Table>
@@ -314,13 +224,39 @@ function Results({ className, selectUsers,...rest }) {
                   Users
                 </TableCell>
                 <TableCell>
-                number of phones
+                 <Box display='flex'>
+                   <Box>
+                  Phones
+                  </Box>
+                  <Box style={{lineHeight : 0, marginLeft :"5px", fontSize :"11px"}}>
+                      <BiUpArrow onClick={() => handleSortChange("number|desc")}/><br />
+                      <BiDownArrow onClick={() =>handleSortChange("number|asc")}/>
+                  </Box>
+                  </Box>
+                </TableCell>
+                <TableCell onClick={() => handleTabsChange(currentTab + 1)}>
+                  role 
+                  {(currentTab === 0) &&
+                   <Label color='success'> all </Label> 
+                  }
+                   {(currentTab === 1) &&
+                   <Label color='success'> agent </Label> 
+                  }
+                   {(currentTab === 2) &&
+                   <Label color='success'> user </Label> 
+                  }
+                  
                 </TableCell>
                 <TableCell>
-                  role
-                </TableCell>
-                <TableCell>
+                 <Box display='flex'>
+                  <Box>
                   Registered Date
+                  </Box>
+                  <Box style={{lineHeight : 0, marginLeft :"5px",fontSize :"11px"}}>
+                      <BiUpArrow onClick={() => handleSortChange("updatedAt|desc")}/><br />
+                      <BiDownArrow onClick={() =>handleSortChange("updatedAt|asc")}/>
+                  </Box>
+                  </Box>
                 </TableCell>
                 <TableCell align="right">
                   Actions
@@ -366,9 +302,15 @@ function Results({ className, selectUsers,...rest }) {
                     <TableCell>
                       {customer.number}
                     </TableCell>
-                    <TableCell>
-                      {customer.role}
-                    </TableCell>
+                    {(customer.role === "agent") &&
+                      <TableCell>
+                        {customer.role}
+                      </TableCell>
+                     }
+                     {(customer.role === "user") &&
+                     <TableCell>
+                     </TableCell> 
+                     }
                     <TableCell>
                       {customer.updatedAt}
                     </TableCell>

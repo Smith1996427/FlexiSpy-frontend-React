@@ -68,34 +68,18 @@ function RegisterView() {
       title="Register"
     >
       <Container maxWidth="sm">
-        <Box
-          mb={5}
-          display="flex"
-          alignItems="center"
-        >
-          <RouterLink to="/">
-            <Logo />
-          </RouterLink>
-          <Button
-            component={RouterLink}
-            to="/"
-            className={classes.backButton}
-          >
-            Back to home
-          </Button>
-        </Box>
+
         <Card>
           <CardContent>
-            <Typography
-              gutterBottom
-              variant="h2"
-              color="textPrimary"
+          <Box
+              mt={3}
+              display="flex"
+              justifyContent="center"
             >
-              Forgot Password?
-            </Typography>
-            <Typography variant="subtitle1">
-              We will send a verification code to your phone 
-            </Typography>
+              <RouterLink to="/">
+                <Logo />
+              </RouterLink>
+            </Box>
             <Box mt={3}>
               {(!verify) &&
               <RegisterForm onSubmitSuccess={handleSubmitSuccess} />

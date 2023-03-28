@@ -17,13 +17,15 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  makeStyles
+  makeStyles,
+  CardHeader
 } from '@material-ui/core';
 import {
   Delete as DeleteIcon
 } from 'react-feather';
 
 import { useSelector } from 'react-redux';
+import Label from 'src/components/Label';
 
 
 function applyPagination(customers, page, limit) {
@@ -32,7 +34,7 @@ function applyPagination(customers, page, limit) {
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {}
+  root: {minHeight : "600px",marginTop : "-14px"}
 }));
 
 function Results({ className, ...rest }) {
@@ -59,7 +61,7 @@ function Results({ className, ...rest }) {
       className={clsx(classes.root, className)}
       {...rest}
     >
-
+     <CardHeader title='My phones' />
       <Divider />
 
       <PerfectScrollbar>
@@ -71,7 +73,7 @@ function Results({ className, ...rest }) {
                   Phone Number
                 </TableCell>
                 <TableCell>
-                  Device
+                  Model
                 </TableCell>
                 <TableCell>
                   OS
@@ -96,6 +98,15 @@ function Results({ className, ...rest }) {
                   >
                    <TableCell>
                       {customer}
+                    </TableCell>
+                    <TableCell>
+                      iphon
+                    </TableCell>
+                    <TableCell>
+                      13.5
+                    </TableCell>
+                    <TableCell>
+                      <Label color="success"> 75%</Label> 
                     </TableCell>
                     <TableCell>
                       2023-3-26
